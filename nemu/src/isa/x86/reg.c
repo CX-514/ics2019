@@ -41,6 +41,18 @@ void reg_test() {
 }
 
 void isa_reg_display() {
+  int i,j;
+  for (i = 0; i <8; i++) {
+    printf("%s:   %8x    %d \r\n", regsl[i], cpu.gpr[i]._32, cpu.gpr[i]._32);
+  }
+  for (i = 0; i <8; i++) {
+    printf("%s:   %8x    %d  \r\n", regsw[i], cpu.gpr[i]._16, cpu.gpr[i]._16);
+  }
+  for (i = 0; i <8; i++) {
+    for (j = 0; j <2; j++) {
+      printf("%s:   %8x    %d  \r\n", regsb[i], cpu.gpr[i]._8[j], cpu.gpr[i]._8[j]);
+    }
+  }
 }
 
 uint32_t isa_reg_str2val(const char *s, bool *success) {
