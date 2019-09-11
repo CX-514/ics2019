@@ -78,9 +78,9 @@ static int cmd_x(char *args) {
   sscanf(arg1, "%d",&N);
   sscanf(arg2, "%x",&EXPR);
   for (i = 0; i <N; i++ ) {
-    printf("%x",EXPR);
+    printf("%#x   ",EXPR);
     result = paddr_read(EXPR,4);
-    printf("%x \r\n",result);
+    printf("%#x \r\n",result);
     EXPR +=4;
   }
   return 0;
