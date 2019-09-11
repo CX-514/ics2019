@@ -61,10 +61,10 @@ static int cmd_info(char *args) {
     printf("Function hasn't been realized yet.");
   }
   if (arg == NULL) {
-    printf("Input Error! You are expected to input 'r' or 'w' after 'info'/r/n");
+    printf("Input Error! You are expected to input 'r' or 'w' after 'info'/n/r");
   }
   else {
-    printf("Input Error! You are expected to input 'r' or 'w' after 'info'/r/n");
+    printf("Input Error! You are expected to input 'r' or 'w' after 'info'/n/r");
   } 
   return 0;
 } 
