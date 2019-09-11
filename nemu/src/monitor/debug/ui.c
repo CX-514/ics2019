@@ -9,6 +9,7 @@
 
 void cpu_exec(uint64_t);
 void isa_reg_display();
+uint32_t paddr_read();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -68,7 +69,16 @@ static int cmd_info(char *args) {
   } 
   return 0;
 } 
-  
+/*
+static int cmd_x(char *args) {
+  int N,i;
+  char *arg1 = strtok(NULL, " ");
+  char *arg2 = strtok(NULL, " ");
+  sscanf(arg1, "%d",&N)
+  sscanf(arg2, "%x",&EXPR)
+  for (i = 0; i <N; i++ )
+}
+*/  
 static int cmd_help(char *args);
 
 static struct {
@@ -81,6 +91,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "Let the program execute N instructions step by step and then suspend execution.When N is not given, the default is 1", cmd_si},
   { "info", "Print register status when inputting instruction 'r', print monitoring point information when inputting instruction 'w'", cmd_info},
+  { "x", "Find the value of the expression EXPR and use the result as the starting memory address and ouput N consecutive  4 bytes which are in hexadecimal form"},
   /* TODO: Add more commands */
 
 };
