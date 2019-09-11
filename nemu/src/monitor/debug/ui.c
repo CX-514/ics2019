@@ -2,7 +2,6 @@
 #include "monitor/expr.h"
 #include "monitor/watchpoint.h"
 #include "nemu.h"
-//#include "nemu/src/isa/x86/reg.c"
 
 #include <stdlib.h>
 #include <readline/readline.h>
@@ -56,8 +55,17 @@ static int cmd_info(char *args) {
   char SUBCMD[10],a[10];
   sscanf(arg, "%s %s",a ,SUBCMD);
   if (strcmp(SUBCMD, "r") == 0) {
-  isa_reg_display();
+    isa_reg_display();
   }
+  if (strcmp(SUBCMD, "w") == 0) {
+    printf("Function hasn't been realized yet.");
+  }
+  if (arg == NULL) {
+    printf("Input Error! You are expected to input 'r' or 'w' after 'info");
+  }
+  else {
+    printf("Input Error! You are expected to input 'r' or 'w' after 'info");
+  } 
   return 0;
 } 
   
