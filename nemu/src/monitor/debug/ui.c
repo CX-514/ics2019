@@ -52,12 +52,12 @@ static int cmd_si(char *args) {
 
 static int cmd_info(char *args) {
   char *arg = strtok(NULL, " ");
-  char SUBCMD[10],a[10];
-  sscanf(arg, "%s %s",a ,SUBCMD);
-  if (strcmp(SUBCMD, "r") == 0) {
+ // char SUBCMD[10],a[10];
+ // sscanf(arg, "%s %s",a ,SUBCMD);
+  if (strcmp(arg, "r") == 0) {
     isa_reg_display();
   }
-  if (strcmp(SUBCMD, "w") == 0) {
+  if (strcmp(arg, "w") == 0) {
     printf("Function hasn't been realized yet.");
   }
   if (arg == NULL) {
