@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ = 1, TK_UEQ = 0, TK_REG = 255, TK_TEN = 10, TK_SIXTEEM = 16, TK_POINT =41,
+  TK_NOTYPE = 256, TK_EQ, TK_UEQ, TK_TEN,
 
   /* TODO: Add more token types */
 
@@ -28,6 +28,8 @@ static struct rule {
   {"\\*", '*'},         // multipy
   {"\\/", '/'},         // divide
   {"==", TK_EQ},         // equal
+  {"!=", TK_UEQ},        // unequal
+  {"^[0-9]\\d*s", TK_TEN},     // ten
   {"\\(", '('},         // left parenthrsis
   {"\\)", ')'}         // right parenthrsis
 };
@@ -85,13 +87,21 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
+          case '+': tokens[nr_token].type = rules[i].token_type; break;
+          case '-': tokens[nr_token].type = rules[i].token_type; break;
+          case '*': tokens[nr_token].type = rules[i].token_type; break;
+          case '/': tokens[nr_token].type = rules[i].token_type; break;
+          case TK_EQ: tokens[nr_token].type = rules[i].token_type; break;
+          case TK_UEQ: tokens[nr_token].type = rules[i].token_type; break;
+          case TK_TEN: tokens[nr_token].type = rules[i].token_type; strncpy(tokens[nr_token].str,substr_start,substr_len); break;
+          case '(': tokens[nr_token].type = rules[i].token_type; break;
+          case ')': tokens[nr_token].type = rules[i].token_type; break;
           default: TODO();
         }
-
+	nr_token ++;  
         break;
       }
     }
-
     if (i == NR_REGEX) {
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
@@ -101,6 +111,74 @@ static bool make_token(char *e) {
   return true;
 }
 
+bool check_parentheses(int p, int q) {
+  int left=0, right=0;
+  if (tokens[p].type!='(' && tokens[q].type!=')') 
+    return false;
+  for(; p<q+1; p++){
+    if (tokens[p].type == '(')
+      left+=1;
+    else if (tokens[p].type == ')')
+      right+=1;
+    if (right>=left)
+      return false; 
+  }
+  if (left!=right)
+    return false;
+  return true;  
+}
+
+uint32_t get_op(int p, int q) {
+  int op=p;
+  int count=0;//括号计数
+  for (int i=p; i<q; i++) {
+    if (tokens[i].type == '(')
+      count++;
+    else if (tokens[i].type == ')')
+      count--;
+    else if (count == 0) {
+      if (tokens[i].type == '+' || tokens[i].type == '-') {
+        op=i;   
+      }
+      else if (tokens[i].type == '*' || tokens[i].type == '/') {
+        if (tokens[op].type != '+' && tokens[op].type != '-') {
+          op=i;
+        }
+      }
+    }
+  }
+  return op;
+}
+
+
+uint32_t eval(int p, int q) {
+  if (p > q) {
+    return false;
+  }
+  else if (p == q) {
+    int out = 0;
+    sscanf(tokens[p].str, "%d", &out);
+    return out;    
+  }
+  else if (check_parentheses(p, q) == true) {
+    return eval(p+1, q-1); 
+  }
+  else{
+    int val1,val2;
+    int op = get_op(p,q);
+    val1 = eval(p, op-1);
+    val2 = eval(op+1, q);
+    switch (tokens[op].type) {
+      case '+': return val1 + val2;
+      case '-': return val1 - val2;
+      case '*': return val1 * val2;
+      case '/': return val1 / val2;
+      default: assert(0);
+    }
+  }
+} 
+
+
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
@@ -108,7 +186,7 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
-
-  return 0;
+  //TODO();
+  int p=0, q=nr_token-1;
+  return eval(p,q);
 }
