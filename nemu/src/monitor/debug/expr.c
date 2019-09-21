@@ -115,12 +115,13 @@ bool check_parentheses(int p, int q) {
   int left=0, right=0;
   if (tokens[p].type!='(' || tokens[q].type!=')') 
     return false;
-  for(; p<q+1; p++){
+  p = p+1;
+  for(; p<q; p++){
     if (tokens[p].type == '(')
       left+=1;
     else if (tokens[p].type == ')')
       right+=1;
-    if (right>=left)
+    if (right>=left+1)
       return false; 
   }
   if (left!=right)
@@ -173,7 +174,7 @@ uint32_t eval(int p, int q) {
       case '-': return val1 - val2;
       case '*': return val1 * val2;
       case '/': return val1 / val2;
-     // default: assert(0);
+      default: assert(0);
     }
   }
   return 0;
