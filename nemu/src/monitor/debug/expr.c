@@ -29,7 +29,7 @@ static struct rule {
   {"\\/", '/'},         // divide
   {"==", TK_EQ},         // equal
   {"!=", TK_UEQ},        // unequal
-  {"[0-9]+", TK_TEN},     // ten
+  {"^[0-9]\\d*s", TK_TEN},     // ten
   {"\\(", '('},         // left parenthrsis
   {"\\)", ')'}         // right parenthrsis
 };
