@@ -87,15 +87,15 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-          case '+': tokens[nr_token].type = rules[i].token_type; break;
-          case '-': tokens[nr_token].type = rules[i].token_type; break;
-          case '*': tokens[nr_token].type = rules[i].token_type; break;
-          case '/': tokens[nr_token].type = rules[i].token_type; break;
+          case '+': tokens[nr_token].type = '+'; break;
+          case '-': tokens[nr_token].type = '-'; break;
+          case '*': tokens[nr_token].type = '*'; break;
+          case '/': tokens[nr_token].type = '/'; break;
           case TK_EQ: tokens[nr_token].type = rules[i].token_type; strncpy(tokens[nr_token].str,substr_start,substr_len); break;
           case TK_UEQ: tokens[nr_token].type = rules[i].token_type; strncpy(tokens[nr_token].str,substr_start,substr_len); break;
           case TK_TEN: tokens[nr_token].type = rules[i].token_type; strncpy(tokens[nr_token].str,substr_start,substr_len); break;
-          case '(': tokens[nr_token].type = rules[i].token_type; break;
-          case ')': tokens[nr_token].type = rules[i].token_type; break;
+          case '(': tokens[nr_token].type = '('; break;
+          case ')': tokens[nr_token].type = ')'; break;
           default: TODO();
         }
 	nr_token ++;  
@@ -113,7 +113,7 @@ static bool make_token(char *e) {
 
 bool check_parentheses(int p, int q) {
   int left=0, right=0;
-  if (tokens[p].type!='(' && tokens[q].type!=')') 
+  if (tokens[p].type!='(' || tokens[q].type!=')') 
     return false;
   for(; p<q+1; p++){
     if (tokens[p].type == '(')
