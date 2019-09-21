@@ -157,7 +157,7 @@ uint32_t eval(int p, int q) {
   }
   else if (p == q) {
     int out = 0;
-    sscanf(tokens[p].str, "%d", &out);
+    sscanf(tokens[p].str, "%x", &out);
     return out;    
   }
   else if (check_parentheses(p, q) == true) {
@@ -173,7 +173,7 @@ uint32_t eval(int p, int q) {
       case '-': return val1 - val2;
       case '*': return val1 * val2;
       case '/': return val1 / val2;
-      //default: assert(0);
+      default: assert(0);
     }
   }
   return 0;
