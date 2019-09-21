@@ -29,7 +29,7 @@ static struct rule {
   {"\\/", '/'},         // divide
   {"==", TK_EQ},         // equal
   {"!=", TK_UEQ},        // unequal
-  {"^[0-9]\\d*s", TK_TEN},     // ten
+  {"[0-9]+", TK_TEN},     // ten
   {"\\(", '('},         // left parenthrsis
   {"\\)", ')'}         // right parenthrsis
 };
@@ -115,7 +115,6 @@ bool check_parentheses(int p, int q) {
   int left=0, right=0;
   if (tokens[p].type!='(' || tokens[q].type!=')') 
     return false;
-  p = p+1;
   for(; p<q; p++){
     if (tokens[p].type == '(')
       left+=1;
