@@ -22,9 +22,17 @@ static inline uint32_t choose(uint32_t n) {
 }
 
 static inline void gen(char str) {
-  char s[2];
-  s[0] = str;
-  s[1] = '\0';
+  int l = choose(4);
+  int r = choose(4);
+  char s[1+l+r];
+  for (int i=0;i<l;i=++) {
+    str[i] = ' '; 
+  }
+  str[l] = str;
+  for (int j = l+1; j<l+r+1;j++) {
+    str[j] = ' ';
+  }
+  str[r+l+1]='\0';
   strcat(buf, s);
 }
 

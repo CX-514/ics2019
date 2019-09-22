@@ -20,10 +20,9 @@ int main(int argc, char *argv[]) {
     char *arg2 = strtok(NULL, "\n");
     bool success = true;
     int result=expr(arg2,&success);
-    if (success) {
-      if (result==atoi(arg1))
-        suc++;
-    }
+    if (result==atoi(arg1))
+      suc++;
+    memset(buf, 0, 65536);
   }
   fclose(fp);
   float acc = suc/100.0;
