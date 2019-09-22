@@ -158,7 +158,7 @@ uint32_t eval(int p, int q) {
   }
   else if (p == q) {
     int out = 0;
-    sscanf(tokens[p].str, "%x", &out);
+    sscanf(tokens[p].str, "%d", &out);
     return out;    
   }
   else if (check_parentheses(p, q) == true) {
