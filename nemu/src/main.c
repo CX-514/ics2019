@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
   char *buf = (char*)malloc(65536*sizeof(char));
   float count=0,suc=0;
   FILE *fp = fopen("/home/cx/ics2019/nemu/tools/gen-expr/input","r");
-  while(fgets(buf,65536,fp)) {
+  while(fgets(buf,65536,fp)!=NULL) {
     char *arg1 = strtok(buf, " ");
     char *arg2 = strtok(NULL, "\n");
     bool success = true;
