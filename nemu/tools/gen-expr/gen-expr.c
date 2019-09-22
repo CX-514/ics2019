@@ -30,7 +30,7 @@ static inline void gen(char str) {
 
 static inline void gen_num() {
   char s[4];
-  uint32_t n = choose(999);
+  uint32_t n = choose(99);
   sprintf(s,"%u",n);
   strcat(buf, s);
 }
@@ -82,9 +82,8 @@ int main(int argc, char *argv[]) {
     pclose(fp);
 
     printf("%u %s\n", result, buf);
-    for (i = 0; buf[i]!='\0';i++) {
-      buf[i] = '\0';
-    }
+    
+    memset(buf,'\0',sizeof(buf));
   }
   return 0;
 }
