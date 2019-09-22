@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
   FILE *fp = fopen("/home/cx/ics2019/nemu/tools/gen-expr/input","r");
   while(fgets(buf,1000,fp)) {
     char *arg1 = strtok(buf, " ");
-    char *arg2 = strtok(NULL, "/n");
+    char *arg2 = strtok(NULL, "\n");
     bool success = true;
     int n;
     sscanf(arg1,"%d", &n);
