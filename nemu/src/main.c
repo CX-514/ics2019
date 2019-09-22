@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
   int is_batch_mode = init_monitor(argc, argv);
 
   char buf[1000];
-  int count=0,suc=0;
+  float count=0,suc=0;
   FILE *fp = fopen("/home/cx/ics2019/nemu/tools/gen-expr/input","r");
   while(fgets(buf,1000,fp)) {
     char *arg1 = strtok(buf, " ");
