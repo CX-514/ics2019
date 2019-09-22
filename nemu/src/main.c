@@ -25,8 +25,8 @@ int main(int argc, char *argv[]) {
     memset(buf, 0, 65536);
   }
   fclose(fp);
-  float acc = suc/100.0;
-  printf("%f\n",acc);
+  /*float acc = suc/100.0;
+  printf("%f\n",acc);*/
   
   /* Receive commands from user. */
   ui_mainloop(is_batch_mode);
