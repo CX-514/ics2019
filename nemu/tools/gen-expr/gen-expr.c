@@ -7,9 +7,6 @@
 
 // this should be enough
 static char buf[65536];
-static inline void gen_rand_expr() {
-  buf[0] = '\0';
-}
 
 static char code_buf[65536];
 static char *code_format =
@@ -19,6 +16,42 @@ static char *code_format =
 "  printf(\"%%u\", result); "
 "  return 0; "
 "}";
+
+static inline uint32_t choose(uint32_t n) {
+  return rand()%n;
+}
+
+static inline void gen(char str) {
+  char s[2];
+  s[0] = str;
+  s[1] = '\0';
+  strcat(buf, s);
+}
+
+static inline void gen_num() {
+  char s[4];
+  uint32_t n = choose(999);
+  sprintf(s,"%u",n);
+  strcat(buf, s);
+}
+
+static inline void gen_rand_op() {
+  switch (choose(4)) {
+    case 0: gen('+'); break;
+    case 1: gen('-'); break;
+    case 2: gen('*'); break;
+    case 3: gen('/'); break;
+  }
+}
+
+static inline void gen_rand_expr() {
+  switch (choose(3)) {
+    case 0: gen_num(); break;
+    case 1: gen('('); gen_rand_expr(); gen(')'); break;
+    default: gen_rand_expr(); gen_rand_op(); gen_rand_expr(); break;
+  }
+} 
+
 
 int main(int argc, char *argv[]) {
   int seed = time(0);
@@ -49,6 +82,9 @@ int main(int argc, char *argv[]) {
     pclose(fp);
 
     printf("%u %s\n", result, buf);
+    for (i = 0; buf[i]!='\0';i++) {
+      buf[i] = '\0';
+    }
   }
   return 0;
 }
