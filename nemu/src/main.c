@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
   int is_batch_mode = init_monitor(argc, argv);
 
   char *buf = (char*)malloc(65536*sizeof(char));
-  float count=0,suc=0;
+  int suc=0;
   FILE *fp = fopen("/home/cx/ics2019/nemu/tools/gen-expr/input","r");
   while(fgets(buf,65536,fp)!=NULL) {
     char *arg1 = strtok(buf, " ");
@@ -24,11 +24,10 @@ int main(int argc, char *argv[]) {
       if (result==atoi(arg1))
         suc++;
     }
-    count++; 
   }
   fclose(fp);
-  float acc = suc/count;
-  printf("%.3f",acc);
+  float acc = suc/100.0;
+  printf("%f\n",acc);
   
   /* Receive commands from user. */
   ui_mainloop(is_batch_mode);
