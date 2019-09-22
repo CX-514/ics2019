@@ -91,7 +91,7 @@ static int cmd_p(char *args) {
   bool success = true;
   int out = expr(arg,&success);
   if (success)
-    printf("%x\n", out);
+    printf("%d\n", out);
   else
     printf("Eval failed\n");
   return 0;  
