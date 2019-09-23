@@ -67,8 +67,29 @@ int free_wp(int n) {
   }
   return 0;
 }
-/*
-void watchpoint_display() {
-  
-}*/
 
+void watchpoint_display() {
+  WP *p = head;
+  if (p == NULL) {
+    printf("No watchpoint \n");
+  }
+  else {
+    while (p !=NULL) {
+      printf("%d    %s    %#x\n", p->NO, p->expr, p->old_val);
+      p = p -> next;
+    }
+  }
+}
+
+int watchpoint_set(char *s) {
+  WP *p = new_wp();
+  printf("NO.%d Watchpoint set", p->NO);
+  strcpy(head->expr,s);
+  bool success = true;
+  p->old_val = expr(p->expr,&success);
+  if (!success) {
+    printf("Fail to Eval\n");
+    return 0;
+  }
+  return 1;
+}
