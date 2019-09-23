@@ -9,7 +9,7 @@
 uint32_t isa_reg_str2val(const char *s, bool *success);
 
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_UEQ, TK_SIXTEEN, TK_TEN, TK_REG,
+  TK_NOTYPE = 256, TK_EQ, TK_UEQ, TK_SIXTEEN, TK_TEN, TK_REG, DEREF,
 
   /* TODO: Add more token types */
 
@@ -138,9 +138,9 @@ bool check_parentheses(int p, int q) {
 }
 
 uint32_t get_op(int p, int q) {
-  int op=p;
+  uint32_t op=p;
   int count=0;//括号计数
-  for (int i=p; i<q; i++) {
+  for (uint32_t i=p; i<q; i++) {
     if (tokens[i].type == '(')
       count++;
     else if (tokens[i].type == ')')
@@ -168,7 +168,7 @@ uint32_t eval(int p, int q) {
     return false;
   }
   else if (p == q) {
-    int out = 0;
+    uint32_t out = 0;
     if (tokens[p].type == TK_TEN) {
       sscanf(tokens[p].str, "%d", &out);
       return out;
@@ -217,11 +217,11 @@ uint32_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
-/*  for (i = 0; i< nr_token; i++) {
-    if (tokens[i].type == '*' && (i == 0 || tokens[i - 1].type == '(') ) {
-      token[i].type = DEREF  
-    }
-  }*/
+  for (int i = 0; i< nr_token; i++) {
+    if (tokens[i].type == '*' && (i == 0 || tokens[i-1].type == '+' || tokens[i-1].type == '-' || tokens[i-1].type == '*' || tokens[i-1].type == '/')) {
+      tokens[i].type = DEREF;  
+    }	
+  }
   int p=0, q=nr_token-1;
   return eval(p,q);
 }
