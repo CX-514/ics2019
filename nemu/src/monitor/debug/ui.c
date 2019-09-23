@@ -107,7 +107,7 @@ static int cmd_d(char *args) {
   int N=0;
   sscanf(arg, "%d", &N);
   if (!free_wp(N)) {
-    printf("Delete NO.%d watchpoint failed", N);
+    printf("Delete NO.%d watchpoint failed\n", N);
   }
   return 0;
 }
