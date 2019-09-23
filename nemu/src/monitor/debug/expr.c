@@ -144,7 +144,10 @@ uint32_t get_op(int p, int q) {
     else if (tokens[i].type == ')')
       count--;
     else if (count == 0) {
-      if (tokens[i].type == '+' || tokens[i].type == '-') {
+      if  (tokens[i].type == TK_EQ || tokens[i].type == TK_UEQ || tokens[i].type == '&') {
+        op=i;
+      }
+      else if (tokens[i].type == '+' || tokens[i].type == '-') {
         op=i;   
       }
       else if (tokens[i].type == '*' || tokens[i].type == '/') {
@@ -164,8 +167,17 @@ uint32_t eval(int p, int q) {
   }
   else if (p == q) {
     int out = 0;
-    sscanf(tokens[p].str, "%d", &out);
-    return out;    
+    if (tokens[p].type == TK_TEN) {
+      sscanf(tokens[p].str, "%d", &out);
+      return out;
+    }
+    if (tokens[p].type == TK_SIXTEEN) {
+      sscanf(tokens[p].str, "%x", &out);
+      return out;
+    }
+   /* if (tokens[p].type == TK_REG) {
+      
+    }*/
   }
   else if (check_parentheses(p, q) == true) {
     return eval(p+1, q-1); 
@@ -180,6 +192,9 @@ uint32_t eval(int p, int q) {
       case '-': return val1 - val2;
       case '*': return val1 * val2;
       case '/': return val1 / val2;
+      case TK_EQ: return val1 == val2;
+      case TK_UEQ: return val1 != val2;
+      case '&':  return val1 & val2;
       default: assert(0);
     }
   }
