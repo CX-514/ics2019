@@ -56,10 +56,21 @@ void isa_reg_display() {
 }
 
 uint32_t isa_reg_str2val(const char *s, bool *success) {
- /* if(success) {
+  uint32_t out=0;
+  if(success) {
     for (int i=0; i<8; i++) {
-    
+      if(strcmp(s,regsl[i]) == 0) {
+        out = cpu.gpr[i]._32;
+        break; 
+      }
+      else if (strcmp(s,regsw[i]) == 0) {
+        out = cpu.gpr[i]._16;
+        break;
+      }
+      else if (strcmp(s,regsb[i]) == 0) {
+        out = cpu.gpr[i]._8[0];
+      }
     }
-  }*/
-  return 0;
+  }
+  return out;
 }

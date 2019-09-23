@@ -6,6 +6,8 @@
 #include <sys/types.h>
 #include <regex.h>
 
+uint32_t isa_reg_str2val(const char *s, bool *success);
+
 enum {
   TK_NOTYPE = 256, TK_EQ, TK_UEQ, TK_SIXTEEN, TK_TEN, TK_REG,
 
@@ -175,9 +177,14 @@ uint32_t eval(int p, int q) {
       sscanf(tokens[p].str, "%x", &out);
       return out;
     }
-   /* if (tokens[p].type == TK_REG) {
-      
-    }*/
+    if (tokens[p].type == TK_REG) {
+      for (int i = 0;i < 4;i ++) {
+        tokens[p].str[i] = tokens[p].str[i+1];
+      }
+      bool success=true;
+      out = isa_reg_str2val(tokens[p].str,&success);
+      return out;
+    }
   }
   else if (check_parentheses(p, q) == true) {
     return eval(p+1, q-1); 
