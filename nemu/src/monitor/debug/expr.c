@@ -23,7 +23,7 @@ static struct rule {
    */
 
   {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},         // plus
+  {"\\+", '+'},         // plus point
   {"\\-", '-'},         // subtract
   {"\\*", '*'},         // multipy
   {"\\/", '/'},         // divide
@@ -210,6 +210,11 @@ uint32_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
+/*  for (i = 0; i< nr_token; i++) {
+    if (tokens[i].type == '*' && (i == 0 || tokens[i - 1].type == '(') ) {
+      token[i].type = DEREF  
+    }
+  }*/
   int p=0, q=nr_token-1;
   return eval(p,q);
 }

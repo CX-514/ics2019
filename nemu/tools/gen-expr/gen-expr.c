@@ -25,14 +25,14 @@ static inline void gen(char str) {
   int l = choose(4);
   int r = choose(4);
   char s[1+l+r];
-  for (int i=0;i<l;i=++) {
-    str[i] = ' '; 
+  for (int i=0;i<l;i++) {
+    s[i] = ' '; 
   }
-  str[l] = str;
+  s[l] = str;
   for (int j = l+1; j<l+r+1;j++) {
-    str[j] = ' ';
+    s[j] = ' ';
   }
-  str[r+l+1]='\0';
+  s[r+l+1]='\0';
   strcat(buf, s);
 }
 
@@ -91,7 +91,7 @@ int main(int argc, char *argv[]) {
 
     printf("%u %s\n", result, buf);
     
-    memset(buf,'\0',sizeof(buf));
+    memset(buf,'\0',65536);
   }
   return 0;
 }

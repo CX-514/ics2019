@@ -110,7 +110,7 @@ static struct {
   { "si", "Let the program execute N instructions step by step and then suspend execution.When N is not given, the default is 1", cmd_si},
   { "info", "Print register status when inputting instruction 'r', print monitoring point information when inputting instruction 'w'", cmd_info},
   { "x", "Find the value of the expression EXPR and use the result as the starting memory address and ouput N consecutive  4 bytes which are in hexadecimal form", cmd_x},
-  {"p", "Expression evalution", cmd_p}
+  { "p", "Expression evalution", cmd_p}
   /* TODO: Add more commands */
 
 };
