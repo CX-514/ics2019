@@ -42,7 +42,7 @@ WP* new_wp() {
 int free_wp(int n) {
   WP *p = head;
   if (p == NULL) {
-    printf("No watchpoint \n");
+   // printf("No watchpoint \n");
     return 0;
   }
   if (head->NO == n) {

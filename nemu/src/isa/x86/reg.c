@@ -69,6 +69,7 @@ uint32_t isa_reg_str2val(const char *s, bool *success) {
       }
       else if (strcmp(s,regsb[i]) == 0) {
         out = cpu.gpr[i]._8[0];
+        break;
       }
     }
   }

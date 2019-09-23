@@ -101,6 +101,16 @@ static int cmd_w(char *args) {
   watchpoint_set(args);
   return 0;
 }
+
+static int cmd_d(char *args) {
+  char *arg = strtok(NULL, " ");
+  int N=0;
+  sscanf(arg, "%d", &N);
+  if (!free_wp(N)) {
+    printf("Delete NO.%d watchpoint failed", N);
+  }
+  return 0;
+}
  
 static int cmd_help(char *args);
 
@@ -117,6 +127,7 @@ static struct {
   { "x", "Find the value of the expression EXPR and use the result as the starting memory address and ouput N consecutive  4 bytes which are in hexadecimal form", cmd_x},
   { "p", "Expression evalution", cmd_p},
   { "w", "Set watchpoint for an expression", cmd_w},
+  { "d", "Delete watchpoints", cmd_d},
   /* TODO: Add more commands */
 
 };
