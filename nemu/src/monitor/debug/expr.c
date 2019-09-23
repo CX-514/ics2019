@@ -7,6 +7,7 @@
 #include <regex.h>
 
 uint32_t isa_reg_str2val(const char *s, bool *success);
+uint32_t paddr_read();
 
 enum {
   TK_NOTYPE = 256, TK_EQ, TK_UEQ, TK_SIXTEEN, TK_TEN, TK_REG, DEREF,
@@ -190,8 +191,10 @@ uint32_t eval(int p, int q) {
     return eval(p+1, q-1); 
   }
   else{
-    int val1,val2;
-    int op = get_op(p,q);
+    uint32_t val1,val2;
+    uint32_t op = get_op(p,q);
+    if (op == p && tokens[p].type == DEREF) 
+      return paddr_read(eval(p+1,q), 4);
     val1 = eval(p, op-1);
     val2 = eval(op+1, q);
     switch (tokens[op].type) {
