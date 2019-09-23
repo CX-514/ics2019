@@ -67,3 +67,8 @@ int free_wp(int n) {
   }
   return 0;
 }
+/*
+void watchpoint_display() {
+  
+}*/
+
