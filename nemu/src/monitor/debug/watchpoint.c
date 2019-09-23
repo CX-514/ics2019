@@ -38,11 +38,32 @@ WP* new_wp() {
     assert(0);
   }
 }
-/*
-void free_wp(WP *wp) {
+
+int free_wp(int n) {
   WP *p = head;
-  WP *q = p;
   if (p == NULL) {
-    printf()
+    printf("No watchpoint \n");
+    return 0;
   }
-}*/
+  if (head->NO == n) {
+    head = head -> next;
+    p -> next = free_;
+    free_ = p;
+    printf("NO.%d Watchpoint deleted\n", n);
+    return 1;
+  }
+  else {
+    WP *q;
+    while (p -> NO != n) {
+      q = p;
+      p = p -> next;
+    }
+    q -> next = p -> next;
+    p -> next = free_;
+    free_ = p;
+    printf("NO.%d Watchpoint deleted\n", n);
+    count --;
+    return 1;
+  }
+  return 0;
+}
