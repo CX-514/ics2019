@@ -59,6 +59,10 @@ void cpu_exec(uint64_t n) {
   }
 
     /* TODO: check watchpoints here. */
+  /* WP* p = check_watchpoint();
+   if (p != NULL) {
+     nemu_state = NEMU_STOP;
+   }*/
 
 #endif
 
