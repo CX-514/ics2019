@@ -57,12 +57,12 @@ void cpu_exec(uint64_t n) {
               "we do not record more instruction trace beyond this point.\n"
               "To capture more trace, you can modify the LOG_MAX macro in %s\n\n", __FILE__);
   }
-
+  
     /* TODO: check watchpoints here. */
-  /* WP* p = check_watchpoint();
-   if (p != NULL) {
-     nemu_state = NEMU_STOP;
-   }*/
+  WP* p = check_watchpoint();
+  if (p != NULL) {
+    nemu_state.state = NEMU_STOP;
+  }
 
 #endif
 
