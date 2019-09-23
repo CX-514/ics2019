@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_UEQ, TK_TEN,
+  TK_NOTYPE = 256, TK_EQ, TK_UEQ, TK_TEN, TK_SIXTEEN, TK_REG,
 
   /* TODO: Add more token types */
 
@@ -30,6 +30,9 @@ static struct rule {
   {"==", TK_EQ},         // equal
   {"!=", TK_UEQ},        // unequal
   {"[0-9]+", TK_TEN},     // ten
+  {"0x[0-9a-f]+", TK_SIXTEEN},   //sixteen
+  {"&&", '&'},          // and
+  {"\\$[a-z]+", TK_REG},  // reg_name
   {"\\(", '('},         // left parenthrsis
   {"\\)", ')'}         // right parenthrsis
 };
@@ -57,7 +60,7 @@ void init_regex() {
 
 typedef struct token {
   int type;
-  char str[1000];
+  char str[32];
 } Token;
 
 static Token tokens[1000] __attribute__((used)) = {};
@@ -94,6 +97,9 @@ static bool make_token(char *e) {
           case TK_EQ: tokens[nr_token].type = rules[i].token_type; memset(tokens[nr_token].str, '\0',1000); strncpy(tokens[nr_token].str,substr_start,substr_len); break;
           case TK_UEQ: tokens[nr_token].type = rules[i].token_type; memset(tokens[nr_token].str, '\0',1000); strncpy(tokens[nr_token].str,substr_start,substr_len); break;
           case TK_TEN: tokens[nr_token].type = rules[i].token_type; memset(tokens[nr_token].str, '\0',1000); strncpy(tokens[nr_token].str,substr_start,substr_len); break;
+          case TK_SIXTEEN: tokens[nr_token].type = rules[i].token_type; memset(tokens[nr_token].str, '\0',1000); strncpy(tokens[nr_token].str,substr_start,substr_len); break;
+          case TK_REG:tokens[nr_token].type = rules[i].token_type; memset(tokens[nr_token].str, '\0',1000); strncpy(tokens[nr_token].str,substr_start,substr_len); break;
+          case '&': tokens[nr_token].type = '&'; break;
           case '(': tokens[nr_token].type = '('; break;
           case ')': tokens[nr_token].type = ')'; break;
           default: TODO();
