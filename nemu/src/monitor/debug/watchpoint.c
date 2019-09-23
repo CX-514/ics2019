@@ -105,6 +105,7 @@ WP* check_watchpoint() {
       p -> new_val = expr(p -> expr,&success);
       if (success) {
         p -> old_val = p -> new_val;
+        printf("Program stop!\n");
         return p;
       }
     }
