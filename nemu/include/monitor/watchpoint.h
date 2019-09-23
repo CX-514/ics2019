@@ -18,6 +18,6 @@ WP* new_wp();
 int free_wp(int n);
 void watchpoint_display();
 int watchpoint_set(char *s);
-
+WP* check_watchoint();
 
 #endif
