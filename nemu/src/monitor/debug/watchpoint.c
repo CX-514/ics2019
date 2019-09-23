@@ -93,3 +93,8 @@ int watchpoint_set(char *s) {
   }
   return 1;
 }
+/*
+WP* check_watchpoint() {
+  WP *p = head;
+  if
+}*/
