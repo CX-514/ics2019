@@ -84,3 +84,6 @@ clean:
 	-rm -rf $(BUILD_DIR)
 	$(MAKE) -C tools/gen-expr clean
 	$(MAKE) -C tools/qemu-diff clean
+
+count:
+	find /home/cx/ics2019/nemu/ -name *.c -or -name *.h | xargs cat | grep -v ^$ | wc -l
