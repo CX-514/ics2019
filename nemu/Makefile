@@ -86,4 +86,4 @@ clean:
 	$(MAKE) -C tools/qemu-diff clean
 
 count: run-env
-        $(shell find /home/cx/ics2019/nemu/ -name *.c -or -name *.h | xargs cat | grep -v ^$ | wc -l, "run")
+	$(shell find /home/cx/ics2019/nemu/ -name *.c -or -name *.h | xargs cat | grep -v ^$ | wc -l, "count")
