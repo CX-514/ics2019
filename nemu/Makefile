@@ -86,4 +86,4 @@ clean:
 	$(MAKE) -C tools/qemu-diff clean
 
 count:
-	find /home/cx/ics2019/nemu/ -name *.c -or -name *.h | xargs cat | grep -v ^$ | wc -l
+	find /home/cx/ics2019/nemu/ -name *.c -or -name *.h | xargs cat | wc -l
