@@ -8,6 +8,8 @@
 #include <readline/history.h>
 
 void cpu_exec(uint64_t);
+void isa_reg_display();
+uint32_t paddr_read();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -36,6 +38,80 @@ static int cmd_q(char *args) {
   return -1;
 }
 
+static int cmd_si(char *args) {
+  char *arg = strtok(NULL, " ");
+  int step;
+  if (arg == NULL) {
+    cpu_exec(1);
+  }
+  else {
+    sscanf(arg, "%d",&step);
+    cpu_exec(step);
+  }
+  return 0;
+}
+
+static int cmd_info(char *args) {
+  char *arg = strtok(NULL, " ");
+  if (strcmp(arg, "r") == 0) {
+    isa_reg_display();
+  }
+  else if (strcmp(arg, "w") == 0) {
+   watchpoint_display();
+  }
+  else {
+    if(arg == NULL) {
+      printf("Input Error! You are expected to input 'r' or 'w' after 'info' \r\n");
+    }
+    else {
+      printf("Input Error! You are expected to input 'r' or 'w' after 'info' \r\n");
+    }
+  } 
+  return 0;
+} 
+
+static int cmd_x(char *args) {
+  int N,i;
+  uint32_t EXPR,result;
+  char *arg1 = strtok(NULL, " ");
+  char *arg2 = strtok(NULL, " ");
+  sscanf(arg1, "%d",&N);
+  sscanf(arg2, "%x",&EXPR);
+  for (i = 0; i <N; i++ ) {
+    printf("%#x   ",EXPR);
+    result = paddr_read(EXPR,4);
+    printf("%#x \r\n",result);
+    EXPR +=4;
+  }
+  return 0;
+}
+
+static int cmd_p(char *args) {
+  char *arg = strtok(NULL, "\n");
+  bool success = true;
+  int out = expr(arg,&success);
+  if (success)
+    printf("%d\n", out);
+  else
+    printf("Eval failed\n");
+  return 0;  
+}
+ 
+static int cmd_w(char *args) {
+  watchpoint_set(args);
+  return 0;
+}
+
+static int cmd_d(char *args) {
+  char *arg = strtok(NULL, " ");
+  int N=0;
+  sscanf(arg, "%d", &N);
+  if (!free_wp(N)) {
+    printf("Delete NO.%d watchpoint failed\n", N);
+  }
+  return 0;
+}
+ 
 static int cmd_help(char *args);
 
 static struct {
@@ -46,7 +122,12 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-
+  { "si", "Let the program execute N instructions step by step and then suspend execution.When N is not given, the default is 1", cmd_si},
+  { "info", "Print register status when inputting instruction 'r', print monitoring point information when inputting instruction 'w'", cmd_info},
+  { "x", "Find the value of the expression EXPR and use the result as the starting memory address and ouput N consecutive  4 bytes which are in hexadecimal form", cmd_x},
+  { "p", "Expression evalution", cmd_p},
+  { "w", "Set watchpoint for an expression", cmd_w},
+  { "d", "Delete watchpoints", cmd_d},
   /* TODO: Add more commands */
 
 };
