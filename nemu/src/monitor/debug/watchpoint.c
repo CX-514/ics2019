@@ -97,7 +97,7 @@ int watchpoint_set(char *s) {
 WP* check_watchpoint() {
   WP *p = head;
   if (p == NULL) {
-    printf("NO Watchpoint! \n");
+   // printf("NO Watchpoint! \n");
     return false;
   }
   else {
