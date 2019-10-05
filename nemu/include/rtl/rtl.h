@@ -130,12 +130,8 @@ void interpret_rtl_exit(int state, vaddr_t halt_pc, uint32_t halt_ret);
 
 /* RTL pseudo instructions */
 
-static inline void rtl_mv(rtleg_t* dest, const rtlreg_t* src1) {
-  *dest = *src1;
-}
-
 static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) {
-  *dest = ~*src1
+  *dest = ~*src1;
 }
 
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
@@ -165,7 +161,34 @@ static inline void rtl_setrelopi(uint32_t relop, rtlreg_t *dest,
 
 static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- src1[width * 8 - 1]
-  TODO();
+  switch(width){
+  case 4: {
+    uint32_t temp = (uint32_t)*src1;
+    temp = temp >> 31;
+    if(temp == 1)
+      *dest = 1;
+    else
+      *dest=0;
+  } break;
+  case 2: {
+    uint16_t temp = (uint32_t)*src1;
+    temp = temp >> 15;
+    if(temp == 1)
+      *dest = 1;
+    else
+      *dest=0;
+  } break;
+  case 1: {
+    uint16_t temp = (uint32_t)*src1;
+    temp = temp >> 7;
+    if(temp == 1)
+      *dest = 1;
+    else
+      *dest=0;
+  } break;
+  default:
+    assert(0);
+  }
 }
 
 static inline void rtl_mux(rtlreg_t* dest, const rtlreg_t* cond, const rtlreg_t* src1, const rtlreg_t* src2) {
@@ -173,15 +196,6 @@ static inline void rtl_mux(rtlreg_t* dest, const rtlreg_t* cond, const rtlreg_t*
   TODO();
 }
 
-static inline void rtl_push(const rtlreg_t* src1) {
-  cpu.esp -= 4;
-  ry=ttl_sm(&cpu.esp, 4, src1);
-}
-
-static inline void rtl_pop(rtlreg_t* dest) {
-  rtl_lm(dest, &cpu.esp, 4);
-  cpu.esp += 4;
-}
 
 #include "isa/rtl.h"
 
