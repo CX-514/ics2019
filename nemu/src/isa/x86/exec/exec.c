@@ -1,6 +1,5 @@
 #include "cpu/exec.h"
 #include "all-instr.h"
-#include "control.c"
 
 static inline void set_width(int width) {
   if (width == 0) {
@@ -47,6 +46,11 @@ make_group(gp5,
 
 /* 0x0f 0x01*/
 make_group(gp7,
+    EMPTY, EMPTY, EMPTY, EMPTY,
+    EMPTY, EMPTY, EMPTY, EMPTY)
+
+/* 0xe8*/
+make_group(call,
     EMPTY, EMPTY, EMPTY, EMPTY,
     EMPTY, EMPTY, EMPTY, EMPTY)
 
