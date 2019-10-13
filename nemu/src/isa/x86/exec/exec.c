@@ -192,12 +192,12 @@ static make_EHelper(2byte_esc) {
   idex(pc, &opcode_table[opcode]);
 }
 
-make_EHelper(call) {
-  rtl_li(&s0,decinfo.seq_pc);
-  rtl_push(&s0);
-  rtl_j(decinfo.jmp_pc);
-  print_asm("call %x", decinfo.jmp_pc); 
-}
+//make_EHelper(call) {
+  //rtl_li(&s0,decinfo.seq_pc);
+  //rtl_push(&s0);
+  //rtl_j(decinfo.jmp_pc);
+  //print_asm("call %x", decinfo.jmp_pc); 
+//}
 
 void isa_exec(vaddr_t *pc) {
   uint32_t opcode = instr_fetch(pc, 1);
