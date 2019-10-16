@@ -135,7 +135,7 @@ static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) {
 }
 
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
-  int32_t temp = (int32_t)* src1;
+  uint32_t temp = (uint32_t)* src1;
   if(width == 4)
     *dest=*src1;
   else {
