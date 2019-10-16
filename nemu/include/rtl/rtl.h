@@ -162,7 +162,7 @@ static inline void rtl_setrelopi(uint32_t relop, rtlreg_t *dest,
 
 static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- src1[width * 8 - 1]
-  switch(width){
+  /*switch(width){
   case 4: {
     uint32_t temp = (uint32_t)*src1;
     temp = temp >> 31;
@@ -189,7 +189,8 @@ static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   } break;
   default:
     assert(0);
-  }
+  }*/
+  *dest = (uint32_t)*src1>>(width*8-1);
 }
 
 static inline void rtl_mux(rtlreg_t* dest, const rtlreg_t* cond, const rtlreg_t* src1, const rtlreg_t* src2) {
