@@ -168,18 +168,18 @@ static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
     if(temp == 1)
       *dest = 1;
     else
-      *dest=0;
+      *dest = 0;
   } break;
   case 2: {
-    uint16_t temp = (uint32_t)*src1;
+    uint16_t temp = (uint16_t)*src1;
     temp = temp >> 15;
     if(temp == 1)
       *dest = 1;
     else
-      *dest=0;
+      *dest = 0;
   } break;
   case 1: {
-    uint16_t temp = (uint32_t)*src1;
+    uint8_t temp = (uint8_t)*src1;
     temp = temp >> 7;
     if(temp == 1)
       *dest = 1;
