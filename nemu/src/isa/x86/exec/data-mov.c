@@ -6,6 +6,11 @@ make_EHelper(mov) {
 }
 
 make_EHelper(push) {
+  if(id_dest->width==1){
+		uint8_t utemp=id_dest->val;
+		int8_t temp=utemp;
+		id_dest->val=temp;
+  }
   rtl_push(&id_dest->val);
   print_asm_template1(push);
 }
