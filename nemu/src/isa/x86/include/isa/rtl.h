@@ -42,12 +42,14 @@ static inline void rtl_is_sub_overflow(rtlreg_t* dest,
   //rtl_xor(*res, *src1, &temp); 
   //rtl_and(dest, dest, *res); 
   //rtl_msb(dest, dest, width);
+  TODO();
 }
 
 static inline void rtl_is_sub_carry(rtlreg_t* dest,
     const rtlreg_t* res, const rtlreg_t* src1) {
   // dest <- is_carry(src1 - src2)
   //rtl_setrelop(RELOP_LTU,dest, res, src1);
+  TODO();
 }
 
 static inline void rtl_is_add_overflow(rtlreg_t* dest,
