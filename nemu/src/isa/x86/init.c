@@ -16,7 +16,6 @@ const long isa_default_img_size = sizeof(isa_default_img);
 static void restart() {
   /* Set the initial program counter. */
   cpu.pc = PC_START;
-  cpu.eflags.value=0x00000020;
   cpu.eflags.value = 0x2;
 }
 
