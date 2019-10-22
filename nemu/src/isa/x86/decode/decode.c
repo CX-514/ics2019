@@ -32,7 +32,16 @@ static inline make_DopHelper(SI) {
    op->simm = ???
    */
   
-  op->simm = instr_fetch(pc, op->width);
+  if(op->width==4){
+		uint32_t temp = instr_fetch(pc, op->width);
+		int32_t result = temp;
+		op->simm = result;
+	}
+  else{
+		uint8_t temp = instr_fetch(pc, op->width);
+		int8_t result = temp;
+		op->simm = result;
+}
   rtl_li(&op->val, op->simm);
 
   print_Dop(op->str, OP_STR_SIZE, "$0x%x", op->simm);
