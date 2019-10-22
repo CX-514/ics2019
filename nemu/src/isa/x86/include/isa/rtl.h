@@ -54,13 +54,22 @@ static inline void rtl_is_sub_carry(rtlreg_t* dest,
 static inline void rtl_is_add_overflow(rtlreg_t* dest,
     const rtlreg_t* res, const rtlreg_t* src1, const rtlreg_t* src2, int width) {
   // dest <- is_overflow(src1 + src2)
-  TODO();
+  rtl_xor(dest, res, src1);
+  rtlreg_t* temp = dest;
+  rtl_xor(temp, res, src2); 
+  rtl_and(dest, dest, temp); 
+  rtl_msb(dest, dest, width);
 }
 
 static inline void rtl_is_add_carry(rtlreg_t* dest,
     const rtlreg_t* res, const rtlreg_t* src1) {
   // dest <- is_carry(src1 + src2)
-  TODO();
+  rtl_setrelop(RELOP_LTU,dest, res, src1);
+  rtlreg_t* temp = dest;
+  rtlreg_t* src2 = dest;
+  rtl_sub(src2, res, src1);
+  rtl_setrelop(RELOP_LTU, temp, res, src2);
+  rtl_or(dest, temp, dest);
 }
 
 #define make_rtl_setget_eflags(f) \
