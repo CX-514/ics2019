@@ -70,10 +70,10 @@ make_EHelper(inc) {
 }
 
 make_EHelper(dec) {
-  rtl_subbi(&s0,&ide_dest->val,1);
+  rtl_subi(&s0,&id_dest->val,1);
   operand_write(id_dest,&s0);
 
-  rtl_update_ZFSF(&s0.id_dest->width);
+  rtl_update_ZFSF(&s0,id_dest->width);
   
   rtl_setrelop(RELOP_LTU,&s1,&id_dest->val,&s0);
   rtl_set_OF(&s1);
