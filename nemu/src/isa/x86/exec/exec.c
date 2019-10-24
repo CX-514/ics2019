@@ -197,7 +197,7 @@ void isa_exec(vaddr_t *pc) {
   printf("%0x: ",*pc);
   uint32_t opcode = instr_fetch(pc, 1);
   decinfo.opcode = opcode;
-  printf("eax: %0x", cpu.eax);
+  printf("eax: %0x\n", cpu.eax);
   set_width(opcode_table[opcode].width);
   idex(pc, &opcode_table[opcode]);
 }
