@@ -40,3 +40,4 @@ make_EHelper(jmp_rm);
 make_EHelper(not);
 make_EHelper(shr);
 make_EHelper(mul);
+make_EHelper(sbb);
