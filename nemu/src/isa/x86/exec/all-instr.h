@@ -29,3 +29,4 @@ make_EHelper(or);
 make_EHelper(dec);
 make_EHelper(jmp);
 make_EHelper(cltd);
+make_EHelper(idiv);
