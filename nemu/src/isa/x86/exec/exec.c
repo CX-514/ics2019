@@ -32,17 +32,17 @@ make_group(gp2,
 /* 0xf6, 0xf7 */
 make_group(gp3,
     IDEX(test_I,test), EMPTY, EX(not), EMPTY,
-    EX(mul), EX(imul1), EMPTY, EX(idiv))
+    EX(mul), EX(imul1), EX(div), EX(idiv))
 
 /* 0xfe */
 make_group(gp4,
-    EXW(inc,1), EXW(dec,1), EMPTY, EMPTY,
+    EX(inc), EX(dec), EMPTY, EMPTY,
     EMPTY, EMPTY, EMPTY, EMPTY)
 
 /* 0xff */
 make_group(gp5,
-    EX(inc), EX(dec), EX(call_rm), EX(call),
-    EX(jmp_rm), EX(jmp), EX(push), EMPTY)
+    EX(inc), EX(dec), EX(call_rm), EX(call_rm),
+    EX(jmp_rm), EX(jmp_rm), EX(push), EMPTY)
 
 /* 0x0f 0x01*/
 make_group(gp7,
