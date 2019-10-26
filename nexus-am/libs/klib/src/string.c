@@ -39,18 +39,15 @@ char* strcat(char* dst, const char* src) {
 }
 
 int strcmp(const char* s1, const char* s2) {
-  while(*s1 && (*s1==*s2)) {
-    s1++;
-    s2++;
-  }
+  while(*s1 && (*s1==*s2)) 
+    s1++,s2++;
   return *(const unsigned char*)s1-*(const unsigned char*)s2;
 }
 
 int strncmp(const char* s1, const char* s2, size_t n) {
-  while(n--) {
+  while(n--) 
     if(*s1++!=*s2++)
       return *(unsigned char*)(s1-1)-*(unsigned char*)(s2-1);
-  }
   return 0;
 }
 
@@ -72,12 +69,11 @@ void* memcpy(void* out, const void* in, size_t n) {
 
 int memcmp(const void* s1, const void* s2, size_t n){
   const unsigned char *p1=s1,*p2=s2;
-  while(n--) {
+  while(n--) 
     if(*p1!=*p2)
       return *p1-*p2;
     else
       p1++,p2++;
-  }
   return 0;
 }
 
