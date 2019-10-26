@@ -29,13 +29,20 @@ char* strncpy(char* dst, const char* src, size_t n) {
 }
 
 char* strcat(char* dst, const char* src) {
-  size_t i,j;
+/*  size_t i,j;
   i=strlen(dst);
   for(j=0;src[j]!='\0';j++) {
     dst[i+j]=src[j];
   }
   dst[i+j]='\0';
-  return dst;
+  return dst;*/
+  char *str=dst;
+  assert(dst!=NULL &&src!=NULL);
+  while(*dst!='\0') {
+    dst++;
+  }
+  while((*dst++=*src++) != '\0');
+  return str;
 }
 
 int strcmp(const char* s1, const char* s2) {
