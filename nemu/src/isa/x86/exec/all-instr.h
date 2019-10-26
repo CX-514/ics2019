@@ -28,6 +28,7 @@ make_EHelper(adc);
 make_EHelper(or);
 make_EHelper(dec);
 make_EHelper(jmp);
+make_EHelper(cwtl);
 make_EHelper(cltd);
 make_EHelper(idiv);
 make_EHelper(shl);
