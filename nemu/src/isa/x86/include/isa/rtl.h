@@ -40,7 +40,7 @@ static inline void rtl_is_sub_overflow(rtlreg_t* dest,
   rtlreg_t* temp = dest;
   rtl_xor(temp, src1, res); 
   rtl_and(dest, dest, temp); 
-  //rtl_msb(dest, dest, width);
+  rtl_msb(dest, dest, width);
 }
 
 static inline void rtl_is_sub_carry(rtlreg_t* dest,
