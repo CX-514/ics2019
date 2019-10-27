@@ -38,12 +38,12 @@ make_EHelper(cltd) {
   if (decinfo.isa.is_operand_size_16) {
   //DX:AX ← sign-extend of AX
     rtl_sext(&s0,&reg_l(R_EAX),2);
-    rtl_mv(&reg_l(R_EDX),&s0+2);
+    rtl_mv(&reg_l(R_EDX),&s0);
   }
   else {
   //EDX:EAX ←sign-extend of EAX
-    rtl_sari(&reg_l(R_EDX), &reg_l(R_EAX), 31);
-    
+    rtl_sext(&s0,&reg_l(R_EAX),2);
+    rtl_mv(&reg_l(R_EAX),&s0);
   }
 
   print_asm(decinfo.isa.is_operand_size_16 ? "cwtl" : "cltd");
