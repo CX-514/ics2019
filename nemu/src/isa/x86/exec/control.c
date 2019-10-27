@@ -52,7 +52,7 @@ make_EHelper(call_rm) {
   //rtl_push(pc);
   //rtl_jr(&id_dest->val);
   rtl_push(&decinfo.seq_pc);
-  rtl_j(id_dest->val);
-  decinfo_set_jmp(true);
+  rtl_jr(&id_dest->val);
+  //decinfo_set_jmp(true);
   print_asm("call *%s", id_dest->str);
 }
