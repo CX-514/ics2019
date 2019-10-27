@@ -43,7 +43,6 @@ make_EHelper(cltd) {
   else {
   //EDX:EAX ←sign-extend of EAX
     rtl_sari(&reg_l(R_EDX), &reg_l(R_EAX), 31);
-    
   }
 
   print_asm(decinfo.isa.is_operand_size_16 ? "cwtl" : "cltd");
