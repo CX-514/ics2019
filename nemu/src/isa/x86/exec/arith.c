@@ -63,7 +63,8 @@ make_EHelper(inc) {
 
   rtl_update_ZFSF(&s0,id_dest->width);
 
-  rtl_setrelop(RELOP_LTU,&s1,&id_dest->val,&s0);
+  rtl_xor(&s1,&id_dest->val,&s0);
+  rtl_msb(&s1,&s1,id_dest->width);
   rtl_set_OF(&s1);  
 
   print_asm_template1(inc);
@@ -75,7 +76,8 @@ make_EHelper(dec) {
 
   rtl_update_ZFSF(&s0,id_dest->width);
   
-  rtl_setrelop(RELOP_LTU,&s1,&id_dest->val,&s0);
+  rtl_xor(&s1,&id_dest->val,&s0);
+  rtl_msb(&s1,&s1,id_dest->width);
   rtl_set_OF(&s1);
 
   print_asm_template1(dec);
