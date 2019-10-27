@@ -19,7 +19,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
       printf("ref_r: %0x %d\n", ref_r->gpr[i]._32, ref_r->gpr[i]._32);
     }
     printf("CF: %d; OF:%d; SF:%d; ZF:%d\n;",ref_r->eflags.CF, ref_r->eflags.OF, ref_r->eflags.SF, ref_r->eflags.ZF);
-    //printf("CF: %d; OF:%d; SF:%d; ZF:%d\n;",cpu.eflags.CF, cpu.eflags.OF, cpu.eflags.SF, cpu.eflags.ZF);
+    printf("CF: %d; OF:%d; SF:%d; ZF:%d\n;",cpu.eflags.CF, cpu.eflags.OF, cpu.eflags.SF, cpu.eflags.ZF);
     return false;
   }
 
