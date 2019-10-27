@@ -77,8 +77,8 @@ make_EHelper(dec) {
   rtl_update_ZFSF(&s0,id_dest->width);
   
   rtl_li(&s1,1);
-  rtl_is_sub_overflow(&t1, &s0, &id_dest->val, &s1, id_dest->width);
-  rtl_set_OF(&t1);  
+  rtl_is_sub_overflow(&t0, &s0, &id_dest->val, &s1, id_dest->width);
+  rtl_set_OF(&t0);  
 
   print_asm_template1(dec);
 }
