@@ -8,7 +8,7 @@ make_EHelper(test) {
   rtl_set_CF(&s0);
   rtl_set_OF(&s0);
 
-  rtl_update_ZFSF(&id_dest->val, id_dest->width);  
+  //rtl_update_ZFSF(&id_dest->val, id_dest->width);  
 
   print_asm_template2(test);
 }
