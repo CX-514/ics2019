@@ -7,7 +7,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
     if(ref_r->gpr[i]._32 != reg_l(i)) break;
   }
 
-  if(i!=0) flag=1;
+  if(i!=8) flag=1;
 
   if(flag==1) {
     for (i=0;i<8;i++) {
