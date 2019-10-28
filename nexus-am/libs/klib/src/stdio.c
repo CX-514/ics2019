@@ -18,6 +18,7 @@ int sprintf(char *out, const char *fmt, ...) {
   int sum=0;
   int i=0;
   int len=strlen(fmt);
+  out[0]='\0';
   while(i<len) {
     if(fmt[i]=='%') {
       int num=0;
@@ -26,7 +27,7 @@ int sprintf(char *out, const char *fmt, ...) {
         case 'd': {
 	  		num=va_arg(ap,int);
 	  		char number[20];
-	  		for (int j=0;j<10;++j) {number[j]=j+'0';}
+	  		for (int j=0;j<10;j++) {number[j]=j+'0';}
 			number[10] = 'a'; number[11] = 'b'; number[12] = 'c'; number[13] = 'd'; number[14] = 'e'; number[15] = 'f';
 	  		int l=0;
 	  		int neg=0;
@@ -44,13 +45,13 @@ int sprintf(char *out, const char *fmt, ...) {
 	    		l++;
 	    		temp=temp/10;
 	  		}
-	  		for (int a=0; a<l; ++a) {
+	  		for (int a=0; a<l; a++) {
 	    		int x=num%10;
 				assert(x<16);
 	    		ls[l-a-1]=number[x];
 	    		num=num/10;
 	  		}
-	  		if(neg) ls[0]='-';
+	  		if(neg) {ls[0]='-';}
 	  		ls[l]='\0';
 	  		strcat(out,ls);
 	  		sum+=strlen(ls);	
@@ -60,8 +61,11 @@ int sprintf(char *out, const char *fmt, ...) {
 	  		strcat(out,ls);
 	  		sum += strlen(ls);
 		}break;
+		default: {
+			printf("fault");
+		}
 	  } 
-    	i+=2;
+      i+=2;
 	}
     else {
       	sum++;
