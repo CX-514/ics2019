@@ -54,6 +54,7 @@ make_EHelper(cmp) {
 
   rtl_is_sub_overflow(&s1, &s0, &id_dest->val, &id_src->val, id_dest->width);
   rtl_set_OF(&s1);
+  
   print_asm_template2(cmp);
 }
 
