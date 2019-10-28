@@ -2,6 +2,7 @@
 #include "monitor/diff-test.h"
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
+  printf("c");
   int i,flag=0;
   for(i=0;i<8;i++) {
     if(ref_r->gpr[i]._32 != reg_l(i)) break;
