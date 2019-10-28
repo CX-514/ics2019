@@ -61,7 +61,7 @@ int sprintf(char *out, const char *fmt, ...) {
 	  		sum += strlen(ls);
 		}break;
 		default: {
-			printf("fault");
+			printf("sprintf fault");
 		}
 	  } 
       i+=2;

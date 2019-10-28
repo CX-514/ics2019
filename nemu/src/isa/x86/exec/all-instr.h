@@ -43,3 +43,5 @@ make_EHelper(not);
 make_EHelper(shr);
 make_EHelper(mul);
 make_EHelper(sbb);
+make_EHelper(in);
+make_EHelper(out);
