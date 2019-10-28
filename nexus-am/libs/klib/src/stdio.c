@@ -26,13 +26,13 @@ int sprintf(char *out, const char *fmt, ...) {
         case 'd': {
 	  		num=va_arg(ap,int);
 	  		char number[10];
-	  		for (int j=0;j<10;j++) number[i]=i+'0'; 
-	  		if(num==0) {
+	  		for (int j=0;j<10;j++) {number[j]=j+'0';}
+	  		int l=0;
+	  		int neg=0;
+			if(num==0) {
 	    		ls[0]='0';
 	    		ls[1]='\0';
 	  		}
- 	  		int l=0;
-	  		int neg=0;
 	  		if(num<0) {
 	    		neg=1;
 	    		l++;
