@@ -49,7 +49,12 @@ make_EHelper(in) {
     default: printf("in failed");
   }
   operand_write(id_dest, &s0);
+  
   print_asm_template2(in);
+
+  #if defined(DIFF_TEST)
+  difftest_skip_ref();
+  #endif
 }
 
 make_EHelper(out) {
@@ -61,4 +66,8 @@ make_EHelper(out) {
   }
 
   print_asm_template2(out);
+
+#if defined(DIFF_TEST)
+difftest_skip_ref();
+#endif
 }
