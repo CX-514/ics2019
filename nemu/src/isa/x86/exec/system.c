@@ -57,7 +57,7 @@ make_EHelper(out) {
     case 4: pio_write_l(id_dest->val, id_src->val); break;
     case 2: pio_write_w(id_dest->val, id_src->val); break;
     case 1: pio_write_b(id_dest->val, id_src->val); break;
-    default: printf("in failed");
+    default: printf("out failed");
   }
 
   print_asm_template2(out);
