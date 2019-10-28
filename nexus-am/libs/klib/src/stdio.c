@@ -28,7 +28,6 @@ int sprintf(char *out, const char *fmt, ...) {
 	  		num=va_arg(ap,int);
 	  		char number[20];
 	  		for (int j=0;j<10;j++) {number[j]=j+'0';}
-			number[10] = 'a'; number[11] = 'b'; number[12] = 'c'; number[13] = 'd'; number[14] = 'e'; number[15] = 'f';
 	  		int l=0;
 	  		int neg=0;
 			if(num==0) {
@@ -47,7 +46,6 @@ int sprintf(char *out, const char *fmt, ...) {
 	  		}
 	  		for (int a=0; a<l; a++) {
 	    		int x=num%10;
-				assert(x<16);
 	    		ls[l-a-1]=number[x];
 	    		num=num/10;
 	  		}
