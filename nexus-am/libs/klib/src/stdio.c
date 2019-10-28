@@ -25,8 +25,9 @@ int sprintf(char *out, const char *fmt, ...) {
       switch(fmt[i+1]) {
         case 'd': {
 	  		num=va_arg(ap,int);
-	  		char number[10];
+	  		char number[20];
 	  		for (int j=0;j<10;j++) {number[j]=j+'0';}
+			number[10] = 'a'; number[11] = 'b'; number[12] = 'c'; number[13] = 'd'; number[14] = 'e'; number[15] = 'f';
 	  		int l=0;
 	  		int neg=0;
 			if(num==0) {
