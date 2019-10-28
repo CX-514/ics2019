@@ -12,7 +12,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 }
 
 int sprintf(char *out, const char *fmt, ...) {
-/*  va_list ap;
+  va_list ap;
   va_start(ap,fmt);
   int i=0;
   while(*fmt!='\0') {
@@ -66,8 +66,9 @@ int sprintf(char *out, const char *fmt, ...) {
     }
   }
   *out='\0';
-  return i;*/ 
-  return 0;
+  va_end(ap);
+  return i; 
+  //return 0;
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
