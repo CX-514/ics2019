@@ -52,9 +52,9 @@ make_EHelper(in) {
   
   print_asm_template2(in);
 
-  #if defined(DIFF_TEST)
-  difftest_skip_ref();
-  #endif
+#if defined(DIFF_TEST)
+difftest_skip_ref();
+#endif
 }
 
 make_EHelper(out) {
@@ -62,8 +62,7 @@ make_EHelper(out) {
     case 4: pio_write_l(id_dest->val, id_src->val); break;
     case 2: pio_write_w(id_dest->val, id_src->val); break;
     case 1: pio_write_b(id_dest->val, id_src->val); break;
-    default: //printf("out failed");
-            assert(0);
+    default: printf("out failed");
   }
 
   print_asm_template2(out);
