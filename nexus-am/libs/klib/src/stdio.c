@@ -44,7 +44,7 @@ int sprintf(char *out, const char *fmt, ...) {
 	    		l++;
 	    		temp=temp/10;
 	  		}
-	  		for (int a=0; a<l; a++) {
+	  		for (int a=0; a<l; ++a) {
 	    		int x=num%10;
 				assert(x<16);
 	    		ls[l-a-1]=number[x];
