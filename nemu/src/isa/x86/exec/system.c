@@ -46,7 +46,7 @@ make_EHelper(in) {
     case 4: rtl_li(&s0,pio_read_l(id_src->val)); break;
     case 2: rtl_li(&s0,pio_read_w(id_src->val)); break;
     case 1: rtl_li(&s0,pio_read_b(id_src->val)); break;
-    default: printf("in failed"); break;
+    default: assert(0);
   }
   operand_write(id_dest, &s0);
   
@@ -62,9 +62,8 @@ make_EHelper(out) {
     case 4: pio_write_l(id_dest->val, id_src->val); break;
     case 2: pio_write_w(id_dest->val, id_src->val); break;
     case 1: pio_write_b(id_dest->val, id_src->val); break;
-    default: printf("out failed"); break;
+    default: assert(0);
   }
-
   print_asm_template2(out);
 
 #if defined(DIFF_TEST)
