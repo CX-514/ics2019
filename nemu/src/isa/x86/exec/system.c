@@ -52,9 +52,6 @@ make_EHelper(in) {
   
   print_asm_template2(in);
 
-#if defined(DIFF_TEST)
-difftest_skip_ref();
-#endif
 }
 
 make_EHelper(out) {
@@ -66,7 +63,4 @@ make_EHelper(out) {
   }
   print_asm_template2(out);
 
-#if defined(DIFF_TEST)
-difftest_skip_ref();
-#endif
 }
