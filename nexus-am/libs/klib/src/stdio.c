@@ -34,7 +34,39 @@ char* get_ch(char *dest, int num, int n) {
 }
 
 int printf(const char *fmt, ...) {
-	return 0;
+	va_list ap;
+  	va_start(ap,fmt);
+  	int sum=0;
+  	int i=0;
+  	int len=strlen(fmt);
+	while(i<len) {
+    if(fmt[i]=='%') {
+      int num=0;
+      char ls[50]="";
+      switch(fmt[i+1]) {
+        case 'd': {
+	  		num=va_arg(ap,int);
+	  		get_ch(ls, num, 10);
+	  		for(int j = 0; j < strlen(ls); j++) _putc(ls[j]);
+	  		sum+=strlen(ls);	
+			i+=2;
+        } break;
+		case 's': {
+	  		strcpy(ls,va_arg(ap, char*));
+	  		for(int j = 0; j < strlen(ls); j++) _putc(ls[j]);
+	  		sum += strlen(ls);
+			i+=2;
+		}break;
+	  } 
+	}
+    else {
+      	sum++;  	
+      	i++;
+		_putc(fmt[i]);
+  	}
+ }
+  va_end(ap);
+  return sum; 
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
@@ -66,7 +98,7 @@ int sprintf(char *out, const char *fmt, ...) {
 	  		sum += strlen(ls);
 		}break;
 		default: {
-			printf("sprintf fault");
+			printf("sprintf fault \n");
 		}
 	  } 
       i+=2;
