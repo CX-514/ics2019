@@ -3,6 +3,36 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
+char* get_ch(char *dest, int num, int n) {
+	char number[20];
+	for (int j=0;j<10;j++) {number[j]=j+'0';}
+	number[10] = 'a'; number[11] = 'b'; number[12] = 'c'; number[13] = 'd'; number[14] = 'e'; number[15] = 'f';
+	int l=0;
+	int neg=0;
+	if(num==0) {
+		dest[0]='0';
+		dest[1]='\0';
+	}
+	if(num<0) {
+		neg=1;
+		l++;
+		num=-num;
+	}
+	int temp=num;
+	while(temp>0) {
+		l++;
+		temp=temp/n;
+	}
+	for (int a=0; a<l; a++) {
+		int x=num%n;
+		dest[l-a-1]=number[x];
+		num=num/n;
+	}
+	if(neg) {dest[0]='-';}
+	dest[l]='\0';
+	return dest;
+}
+
 int printf(const char *fmt, ...) {
 	return 0;
 }
@@ -26,32 +56,7 @@ int sprintf(char *out, const char *fmt, ...) {
       switch(fmt[i+1]) {
         case 'd': {
 	  		num=va_arg(ap,int);
-	  		char number[20];
-	  		for (int j=0;j<10;j++) {number[j]=j+'0';}
-			number[10] = 'a'; number[11] = 'b'; number[12] = 'c'; number[13] = 'd'; number[14] = 'e'; number[15] = 'f';
-	  		int l=0;
-	  		int neg=0;
-			if(num==0) {
-	    		ls[0]='0';
-	    		ls[1]='\0';
-	  		}
-	  		if(num<0) {
-	    		neg=1;
-	    		l++;
-	    		num=-num;
-	  		}
-	  		int temp=num;
-	  		while(temp>0) {
-	    		l++;
-	    		temp=temp/10;
-	  		}
-	  		for (int a=0; a<l; a++) {
-	    		int x=num%10;
-	    		ls[l-a-1]=number[x];
-	    		num=num/10;
-	  		}
-	  		if(neg) {ls[0]='-';}
-	  		ls[l]='\0';
+	  		get_ch(ls, num, 10);
 	  		strcat(out,ls);
 	  		sum+=strlen(ls);	
         } break;
