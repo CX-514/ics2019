@@ -12,6 +12,7 @@ char* get_ch(char *dest, int num, int n) {
 	if(num==0) {
 		dest[0]='0';
 		dest[1]='\0';
+		return dest;
 	}
 	if(num<0) {
 		neg=1;
@@ -47,7 +48,7 @@ int printf(const char *fmt, ...) {
         case 'd': {
 	  		num=va_arg(ap,int);
 	  		get_ch(ls, num, 10);
-	  		for(int j = 0; j < strlen(ls); j++) _putc(ls[j]);
+	  		for(int j = 0; j < strlen(ls); j++) {_putc(ls[j]);}
 	  		sum+=strlen(ls);	
 			i+=2;
         } break;
@@ -57,6 +58,9 @@ int printf(const char *fmt, ...) {
 	  		sum += strlen(ls);
 			i+=2;
 		}break;
+		default: {
+			i = len;
+		}
 	  } 
 	}
     else {
