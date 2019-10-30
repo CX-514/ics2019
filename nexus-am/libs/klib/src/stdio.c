@@ -26,6 +26,7 @@ char* get_ch(char *dest, int num, int n) {
 	}
 	for (int a=0; a<l; a++) {
 		int x=num%n;
+		assert(x<16);
 		dest[l-a-1]=number[x];
 		num=num/n;
 	}
