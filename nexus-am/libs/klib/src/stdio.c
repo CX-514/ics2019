@@ -8,14 +8,14 @@ char* get_ch(char *dest, int num, int n) {
 	for (int j=0;j<10;j++) {number[j]=j+'0';}
 	number[10] = 'a'; number[11] = 'b'; number[12] = 'c'; number[13] = 'd'; number[14] = 'e'; number[15] = 'f';
 	int l=0;
-	int neg=0;
+	int flag=0;
 	if(num==0) {
 		dest[0]='0';
 		dest[1]='\0';
 		return dest;
 	}
 	if(num<0) {
-		neg=1;
+		flag=1;
 		l++;
 		num=-num;
 	}
@@ -30,7 +30,7 @@ char* get_ch(char *dest, int num, int n) {
 		dest[l-a-1]=number[x];
 		num=num/n;
 	}
-	if(neg) {dest[0]='-';}
+	if(flag) {dest[0]='-';}
 	dest[l]='\0';
 	return dest;
 }
@@ -50,7 +50,7 @@ int printf(const char *fmt, ...) {
 	  		num=va_arg(ap,int);
 	  		get_ch(ls, num, 10);
 	  		for(int j = 0; j < strlen(ls); j++) {_putc(ls[j]);}
-	  		sum+=strlen(ls);	
+	  		sum += strlen(ls);	
 			i+=2;
         } break;
 		case 's': {
@@ -58,7 +58,7 @@ int printf(const char *fmt, ...) {
 	  		for(int j = 0; j < strlen(ls); j++) _putc(ls[j]);
 	  		sum += strlen(ls);
 			i+=2;
-		}break;
+		} break;
 		default: {
 			i = len;
 		}
