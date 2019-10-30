@@ -2,6 +2,8 @@
 #include <amdev.h>
 #include <nemu.h>
 
+
+#define I8042_DATA_PORT 0x60
 #define KEYDOWN_MASK 0x8000
 
 size_t __am_input_read(uintptr_t reg, void *buf, size_t size) {
