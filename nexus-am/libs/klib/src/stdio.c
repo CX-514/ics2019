@@ -59,6 +59,18 @@ int printf(const char *fmt, ...) {
 	  		sum += strlen(ls);
 			i+=2;
 		} break;
+		case '0': {
+			num=va_arg(ap,int);
+	  		get_ch(ls, num, 10);
+			int width = fmt[i+2] - '0';
+			for(int i = strlen(ls); i < width; i++) {
+				sum++;
+				_putc('0');
+			}
+	  		for(int j = 0; j < strlen(ls); j++) {_putc(ls[j]);}
+	  		sum += strlen(ls);	
+			i+=4;
+		} break;
 		default: {
 			i = len;
 		}
