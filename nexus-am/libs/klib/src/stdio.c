@@ -62,7 +62,7 @@ int printf(const char *fmt, ...) {
 		case '0': {
 			num=va_arg(ap,int);
 	  		get_ch(ls, num, 10);
-			int width = fmt[i+2] - '0';
+			int width = fmt[i+2]-'0';
 			for(int i = strlen(ls); i < width; i++) {
 				sum++;
 				_putc('0');
