@@ -77,9 +77,9 @@ int printf(const char *fmt, ...) {
 	  } 
 	}
     else {
-      	sum++;  	
+      	_putc(fmt[i]);
+		sum++;  	
       	i++;
-		_putc(fmt[i]);
   	}
  }
   va_end(ap);
