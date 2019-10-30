@@ -11,7 +11,7 @@ size_t __am_timer_read(uintptr_t reg, void *buf, size_t size) {
     case _DEVREG_TIMER_UPTIME: {
       _DEV_TIMER_UPTIME_t *uptime = (_DEV_TIMER_UPTIME_t *)buf;
       uint64_t temptime = inl(RTC_PORT) - r_time;
-      uptime->hi = (uint32_t) (temptime >> 32);
+      uptime->hi = (uint32_t) (temptime << 32);
       uptime->lo = (uint32_t) temptime;
       return sizeof(_DEV_TIMER_UPTIME_t);
     }
