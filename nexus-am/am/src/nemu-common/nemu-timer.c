@@ -6,6 +6,10 @@
 
 uint32_t r_time;
 
+void __am_timer_init() {
+  r_time = inl(0x48);
+}
+
 size_t __am_timer_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_TIMER_UPTIME: {
@@ -26,8 +30,4 @@ size_t __am_timer_read(uintptr_t reg, void *buf, size_t size) {
     }
   }
   return 0;
-}
-
-void __am_timer_init() {
-  r_time = inl(0x48);
 }
