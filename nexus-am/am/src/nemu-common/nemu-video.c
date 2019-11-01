@@ -3,6 +3,8 @@
 #include <nemu.h>
 
 #define SCREEN_PORT 0x100
+#define SCREEN_H 300
+#define SCREEN_W 400
 int screen_width();
 int screen_height();
 int draw_sync();
@@ -11,8 +13,8 @@ size_t __am_video_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_VIDEO_INFO: {
       _DEV_VIDEO_INFO_t *info = (_DEV_VIDEO_INFO_t *)buf;
-      info->width = (inl(SCREEN_PORT) >> 16);
-      info->height = (inl(SCREEN_PORT) & 0xffff);
+      info->width = SCREEN_W;
+      info->height = SCREEN_H;
       return sizeof(_DEV_VIDEO_INFO_t);
     }
   }
