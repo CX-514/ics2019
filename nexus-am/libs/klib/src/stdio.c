@@ -71,6 +71,15 @@ int printf(const char *fmt, ...) {
 	  		sum += strlen(ls);	
 			i+=4;
 		} break;
+		case 'p': {
+				num=va_arg(ap, int);
+				get_ch(ls, num, 16);
+				_putc('0'); _putc('x');
+				sum += 2;
+				for(int j = 0; j < strlen(ls); j++) _putc(ls[j]);
+				sum+=strlen(ls);
+				i += 2;
+		} break;
 		default: {
 			i = len;
 		}
