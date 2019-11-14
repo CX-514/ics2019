@@ -46,8 +46,15 @@ typedef struct {
       uint32_t OF:1;
       unsigned:20;
     };
-     rtlreg_t value;
-   }eflags;
+    rtlreg_t value;
+  }eflags;
+
+  struct {
+    uint32_t limit;
+    uint32_t base;
+  }idtr;
+  
+  uint32_t cs;
 
 } CPU_state;
 
