@@ -17,7 +17,28 @@ make_EHelper(pop) {
 }
 
 make_EHelper(pusha) {
-  TODO();
+  if (decinfo.isa.is_operand_size_16) {
+		t0 = reg_w(R_SP);
+		rtl_push((rtlreg_t *)&reg_w(R_AX));
+		rtl_push((rtlreg_t *)&reg_w(R_CX));
+		rtl_push((rtlreg_t *)&reg_w(R_DX));
+		rtl_push((rtlreg_t *)&reg_w(R_BX));
+		rtl_push((rtlreg_t *)&t0);
+		rtl_push((rtlreg_t *)&reg_w(R_BP));
+		rtl_push((rtlreg_t *)&reg_w(R_SI));
+		rtl_push((rtlreg_t *)&reg_w(R_DI));
+	}
+  else { 
+		t0 = reg_l(R_ESP);
+		rtl_push(&reg_l(R_EAX));
+		rtl_push(&reg_l(R_ECX));
+		rtl_push(&reg_l(R_EDX));
+		rtl_push(&reg_l(R_EBX));
+		rtl_push(&t0);
+		rtl_push(&reg_l(R_EBP));
+		rtl_push(&reg_l(R_ESI));
+		rtl_push(&reg_l(R_EDI)); 
+  }
 
   print_asm("pusha");
 }
