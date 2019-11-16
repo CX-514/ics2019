@@ -17,7 +17,7 @@ make_EHelper(pop) {
 }
 
 make_EHelper(pusha) {
-  if (decinfo.isa.is_operand_size_16) {
+  /*if (decinfo.isa.is_operand_size_16) {
 		t0 = reg_w(R_SP);
 		rtl_push((rtlreg_t *)&reg_w(R_AX));
 		rtl_push((rtlreg_t *)&reg_w(R_CX));
@@ -38,8 +38,8 @@ make_EHelper(pusha) {
 		rtl_push(&reg_l(R_EBP));
 		rtl_push(&reg_l(R_ESI));
 		rtl_push(&reg_l(R_EDI)); 
-  }
-
+  }*/
+  TODO();
   print_asm("pusha");
 }
 
