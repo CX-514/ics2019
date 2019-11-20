@@ -14,9 +14,9 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr ehdr;
   ramdisk_read((void *)&ehdr, 0, sizeof(Elf_Ehdr));
-  // Elf_Phdr phdr;
-  // ramdisk_read((void *)&phdr, ehdr.e_phentsize, sizeof(Elf_Phdr));
   // for (size_t i = 0; i < ehdr.e_phnum; ++i) {
+  //   Elf_Phdr phdr;
+  //   ramdisk_read((void *)&phdr, ehdr.e_phentsize, sizeof(Elf_Phdr));
   //   if (phdr.p_type == PT_LOAD) {
   //     ramdisk_read((void *)phdr.p_vaddr, phdr.p_offset, phdr.p_memsz);
   //     memset((void *)(phdr.p_vaddr + phdr.p_filesz), 0, phdr.p_memsz - phdr.p_filesz);
