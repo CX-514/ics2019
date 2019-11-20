@@ -30,10 +30,10 @@ size_t __am_video_write(uintptr_t reg, void *buf, size_t size) {
       int s=(ctl->y*screen_width())+ctl->x;
       int a=0;
       for (int i=0; i<ctl->h; i++) {
-	for (int j=0; j<ctl->w; j++) {
-	  fb[s+j]=*(ctl->pixels + a++);
-	}
-	s+=screen_width();
+	      for (int j=0; j<ctl->w; j++) {
+	        fb[s+j]=*(ctl->pixels + a++);
+	      }
+	      s+=screen_width();
       }
       if (ctl->sync) {
         outl(SYNC_ADDR, 0);
