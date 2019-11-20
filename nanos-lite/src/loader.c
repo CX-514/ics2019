@@ -13,7 +13,7 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len);
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr ehdr;
-  ramdisk_read(&ehdr, 0, sizeof(Elf_Ehdr));
+  ramdisk_read((void *)&ehdr, 0, sizeof(Elf_Ehdr));
   // for (size_t i = 0; i < ehdr.e_phnum; ++i) {
   //   Elf_Phdr phdr;
   //   ramdisk_read((void *)&phdr, ehdr.e_phentsize, sizeof(Elf_Phdr));
