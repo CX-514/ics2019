@@ -7,7 +7,7 @@ struct _Context {
   int irq;*/
   struct _AddressSpace *as;
   uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
-  uint32_t irq;
+  int irq;
   uint32_t eip, cs, eflags;
 };
 
