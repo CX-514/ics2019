@@ -32,11 +32,11 @@ make_EHelper(int) {
 
 make_EHelper(iret) {
   rtl_pop(&t0);
-  decinfo.jmp_pc = t0;
-  rtl_pop(&t1);
-  cpu.cs = t1;
-  rtl_pop(&t2);
-  cpu.eflags.value = t2;
+  rtl_j(t0);
+  rtl_pop(&t0);
+  cpu.cs = t0;
+  rtl_pop(&t0);
+  cpu.eflags.value = t0;
 
   print_asm("iret");
 }
