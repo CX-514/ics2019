@@ -74,7 +74,7 @@ void *_sbrk(intptr_t increment) {
     return (void *)former_break;
   } 
   else {
-    return (void*)-1;
+    return (void *)-1;
   }
 }
 
