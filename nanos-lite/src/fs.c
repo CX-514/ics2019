@@ -43,7 +43,7 @@ void init_fs() {
 int fs_open(const char *pathname, int flags, int mode) {
   for (int i = 0; i < NR_FILES; i++) {
     if (strcmp(pathname, file_table[i].name) == 0) {
-      //file_table[i].open_offset = 1;
+      file_table[i].open_offset = 1;
       return i;
     }
   }
@@ -52,18 +52,17 @@ int fs_open(const char *pathname, int flags, int mode) {
 
 size_t fs_read(int fd, void *buf, size_t len) {
   size_t res;
-  size_t size = 0;
 	if(file_table[fd].size && file_table[fd].open_offset + len > file_table[fd].size){
-		size = file_table[fd].size - file_table[fd].open_offset;
+		len = file_table[fd].size - file_table[fd].open_offset;
 	}
   if(file_table[fd].read == NULL){
-  	res = ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, size);
+  	res = ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
 	}
 	else {
-    res = file_table[fd].read(buf, file_table[fd].open_offset, size);
+    res = file_table[fd].read(buf, file_table[fd].open_offset, len);
   }
   file_table[fd].open_offset += res;
-  return res;
+  return len;
 }
 
 int fs_close(int fd) {
