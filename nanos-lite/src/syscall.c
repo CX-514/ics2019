@@ -15,7 +15,7 @@ _Context* do_syscall(_Context *c) {
     case SYS_open: c->GPRx = fs_open((void *)a[1], a[2], a[3]); break;
     case SYS_read: c->GPRx = fs_read(a[1], (void *)a[2], a[3]); break;
     case SYS_write: 
-      Log("write\n");
+      //Log("write\n");
       if(a[1]==1||a[1]==2){
 				  for(int i=0;i<a[3];i++)
 					  _putc(*(char*)(a[2]+i));
