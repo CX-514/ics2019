@@ -25,7 +25,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   // }
   // return ehdr.e_entry;
   int fd = fs_open(filename, 0, 0);
-  //assert(fd == -1);
+  assert(fd == -1);
   Elf_Ehdr ehdr;
   fs_read(fd, (void *)&ehdr, sizeof(Elf_Ehdr));
   Elf_Phdr phdr[ehdr.e_phnum];
