@@ -85,33 +85,18 @@ size_t fs_lseek(int fd, size_t offset, int whence) {
 
 size_t fs_write(int fd, const void *buf, size_t len) {
   assert(0 <= fd && fd < NR_FILES);
-  // size_t res;
-  // if(file_table[fd].write==NULL) {
-	//   size_t res=file_table[fd].size;
-	//   if(res-file_table[fd].open_offset<len)
-	// 	  res = res - file_table[fd].open_offset;
-	//   res = ramdisk_write(buf, file_table[fd].disk_offset+file_table[fd].open_offset, res);
-  //   file_table[fd].open_offset += res;
-	//   return res;
-  // }  
-	// else {
-	// 	res = file_table[fd].write(buf, file_table[fd].open_offset, len);
-  //   file_table[fd].open_offset += res;
-	//   return res;
-  // }
-  size_t sz;
-  if (file_table[fd].write == NULL) {
-    sz = file_table[fd].open_offset + len <= file_table[fd].size ? len : file_table[fd].size - file_table[fd].open_offset;
-    sz = ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, sz);
-    file_table[fd].open_offset += sz;
-    return sz;
-  } else {
-    sz = len;
-    if (file_table[fd].size && file_table[fd].open_offset + len > file_table[fd].size) {
-      sz = file_table[fd].size - file_table[fd].open_offset;
-    }
-    sz = file_table[fd].write(buf, file_table[fd].open_offset, sz);
-    file_table[fd].open_offset += sz;
-    return sz;
-}
+  size_t res;
+  if(file_table[fd].write==NULL) {
+	  res=file_table[fd].size;
+	  if(res-file_table[fd].open_offset<len)
+		  res = res - file_table[fd].open_offset;
+	  res = ramdisk_write(buf, file_table[fd].disk_offset+file_table[fd].open_offset, res);
+    file_table[fd].open_offset += res;
+	  return res;
+  }  
+	else {
+		res = file_table[fd].write(buf, file_table[fd].open_offset, len);
+    file_table[fd].open_offset += res;
+	  return res;
+  }
 }
