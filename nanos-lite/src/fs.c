@@ -1,6 +1,7 @@
 #include "fs.h"
 
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
+size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 
 typedef size_t (*ReadFn) (void *buf, size_t offset, size_t len);
 typedef size_t (*WriteFn) (const void *buf, size_t offset, size_t len);
@@ -80,4 +81,21 @@ size_t fs_lseek(int fd, size_t offset, int whence) {
 		default: panic("fs_lseek error!");
   }
   return file_table[fd].open_offset;
+}
+
+size_t fs_write(int fd, const void *buf, size_t len) {
+  size_t res;
+  if(file_table[fd].write==NULL) {
+	  size_t res=file_table[fd].size;
+	  if(res-file_table[fd].open_offset<len)
+		  res = res - file_table[fd].open_offset;
+	  res = ramdisk_write(buf, file_table[fd].disk_offset+file_table[fd].open_offset, res);
+    file_table[fd].open_offset += res;
+	  return res;
+  }  
+	else{
+		res = file_table[fd].write(buf, file_table[fd].open_offset, len);
+    file_table[fd].open_offset += res;
+	  return res;
+  }
 }
