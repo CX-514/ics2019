@@ -99,6 +99,10 @@ size_t fs_write(int fd, const void *buf, size_t len) {
   //   file_table[fd].open_offset += res;
 	//   return res;
   // }
+  if(fd==1||fd==2) {
+		for(int i=0;i<len;i++)
+		  _putc(*(char*)(buf+i));
+  } 
   size_t sz;
   if (file_table[fd].write == NULL) {
     sz = file_table[fd].open_offset + len <= file_table[fd].size ? len : file_table[fd].size - file_table[fd].open_offset;
