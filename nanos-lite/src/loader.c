@@ -34,15 +34,15 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     panic("loader: can't open file %s!", filename);
   }
 
-  Elf_Ehdr elf_header;
-  fs_read(fd, (void *)&elf_header, sizeof(Elf_Ehdr));
-  if (memcmp(elf_header.e_ident, ELFMAG, SELFMAG))
+  Elf_Ehdr ehdr;
+  fs_read(fd, (void *)&ehdr, sizeof(Elf_Ehdr));
+  if (memcmp(ehdr.e_ident, ELFMAG, SELFMAG))
     panic("file %s ELF format error!", filename);
 
-  for (size_t i = 0; i < elf_header.e_phnum; ++i) {
+  for (size_t i = 0; i < ehdr.e_phnum; ++i) {
     Elf_Phdr phdr;
-    fs_lseek(fd, elf_header.e_phoff + elf_header.e_phentsize * i, SEEK_SET);
-    fs_read(fd, (void *)&phdr, elf_header.e_phentsize);
+    fs_lseek(fd, ehdr.e_phoff + ehdr.e_phentsize * i, SEEK_SET);
+    fs_read(fd, (void *)&phdr, ehdr.e_phentsize);
     if (phdr.p_type == PT_LOAD) {
       fs_lseek(fd, phdr.p_offset, SEEK_SET);
       fs_read(fd, (void *)phdr.p_vaddr, phdr.p_filesz);
@@ -52,7 +52,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 
   fs_close(fd);
 
-  return elf_header.e_entry;
+  return ehdr.e_entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
