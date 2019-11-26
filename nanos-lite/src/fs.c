@@ -102,6 +102,7 @@ size_t fs_write(int fd, const void *buf, size_t len) {
   if(fd==1||fd==2) {
 		for(int i=0;i<len;i++)
 		  _putc(*(char*)(buf+i));
+    return len;
   } 
   size_t sz;
   if (file_table[fd].write == NULL) {
