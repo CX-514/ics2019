@@ -30,10 +30,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   // fs_close(fd);
   // return ehdr.e_entry;
   int fd = fs_open(filename, 0, 0);
-  if (fd == -1) {
-    panic("loader: can't open file %s!", filename);
-  }
-
+  // if (fd == -1) {
+  //   panic("loader: can't open file %s!", filename);
+  // }
+  assert(fd==-1);
   Elf_Ehdr ehdr;
   fs_read(fd, (void *)&ehdr, sizeof(Elf_Ehdr));
   if (memcmp(ehdr.e_ident, ELFMAG, SELFMAG))
