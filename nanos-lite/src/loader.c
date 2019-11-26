@@ -13,24 +13,48 @@
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  int fd = fs_open(filename, 0, 0);
+  // int fd = fs_open(filename, 0, 0);
+  // if (fd == -1) {
+  //   panic("loader failed");
+  // }
+  // Elf_Ehdr ehdr;
+  // fs_read(fd, (void *)&ehdr, sizeof(Elf_Ehdr));
+  // for (size_t i = 0; i < ehdr.e_phnum; ++i) {
+  //   Elf_Phdr phdr;
+  //   fs_lseek(fd, ehdr.e_phoff + ehdr.e_phentsize * i, SEEK_SET);
+  //   fs_read(fd, (void *)&phdr, ehdr.e_phentsize);
+  //   if (phdr.p_type == PT_LOAD) {
+  //     fs_lseek(fd, phdr.p_offset, SEEK_SET);
+  //     fs_read(fd, (void *)phdr.p_vaddr, phdr.p_filesz);
+  //     memset((void *)(phdr.p_vaddr + phdr.p_filesz), 0, phdr.p_memsz - phdr.p_filesz);
+  //   }
+  // }
+  // fs_close(fd);
+  // return ehdr.e_entry;
+   int fd = fs_open(filename, 0, 0);
   if (fd == -1) {
-    panic("loader failed");
+    panic("loader: can't open file %s!", filename);
   }
-  Elf_Ehdr ehdr;
-  fs_read(fd, (void *)&ehdr, sizeof(Elf_Ehdr));
-  for (size_t i = 0; i < ehdr.e_phnum; ++i) {
+
+  Elf_Ehdr elf_header;
+  fs_read(fd, (void *)&elf_header, sizeof(Elf_Ehdr));
+  if (memcmp(elf_header.e_ident, ELFMAG, SELFMAG))
+    panic("file %s ELF format error!", filename);
+
+  for (size_t i = 0; i < elf_header.e_phnum; ++i) {
     Elf_Phdr phdr;
-    fs_lseek(fd, ehdr.e_phoff + ehdr.e_phentsize * i, SEEK_SET);
-    fs_read(fd, (void *)&phdr, ehdr.e_phentsize);
+    fs_lseek(fd, elf_header.e_phoff + elf_header.e_phentsize * i, SEEK_SET);
+    fs_read(fd, (void *)&phdr, elf_header.e_phentsize);
     if (phdr.p_type == PT_LOAD) {
       fs_lseek(fd, phdr.p_offset, SEEK_SET);
       fs_read(fd, (void *)phdr.p_vaddr, phdr.p_filesz);
       memset((void *)(phdr.p_vaddr + phdr.p_filesz), 0, phdr.p_memsz - phdr.p_filesz);
     }
   }
+
   fs_close(fd);
-  return ehdr.e_entry;
+
+return elf_header.e_entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
