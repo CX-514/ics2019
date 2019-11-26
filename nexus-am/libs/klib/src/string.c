@@ -48,11 +48,17 @@ char* strcat(char* dst, const char* src) {
 }
 
 int strcmp(const char* s1, const char* s2) {
-  int res=0;
-  while(*s1 && *s2 && (res=(*s1-*s2))==0) {
-    s1++;s2++;
+  // int res=0;
+  // while(*s1 && *s2 && (res=(*s1-*s2))==0) {
+  //   s1++;s2++;
+  // }
+  // return res;
+  size_t i;
+  for (i = 0; s1[i] == s2[i]; ++i) {
+    if (s1[i] == '\0')
+      return 0;
   }
-  return res;
+  return ((signed char *)s1)[i] - ((signed char *)s2)[i];
 }
 
 int strncmp(const char* s1, const char* s2, size_t n) {
@@ -89,12 +95,17 @@ void* memcpy(void* out, const void* in, size_t n) {
 }
 
 int memcmp(const void* s1, const void* s2, size_t n){
-  const unsigned char *p1=s1,*p2=s2;
-  while(n--) 
-    if(*p1 != *p2)
-      return *p1-*p2;
-    else
-      p1++,p2++;
+  // const unsigned char *p1=s1,*p2=s2;
+  // while(n--) 
+  //   if(*p1 != *p2)
+  //     return *p1-*p2;
+  //   else
+  //     p1++,p2++;
+  // return 0;
+  size_t i;
+  for (i = 0; i < n; ++i)
+    if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
+      return ((signed char *)s1)[i] - ((signed char *)s2)[i];
   return 0;
 }
 
