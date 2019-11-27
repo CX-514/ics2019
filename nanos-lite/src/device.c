@@ -15,8 +15,18 @@ static const char *keyname[256] __attribute__((used)) = {
   _KEYS(NAME)
 };
 
+#define KEYDOWN_MASK 0x8000
+
 size_t events_read(void *buf, size_t offset, size_t len) {
-  return 0;
+  int keycode = read_key();
+  if ((keycode & ~KEYDOWN_MASK) == _KEY_NONE) {
+    sprintf(buf, "t %d\n", uptime());
+  } else if (keycode & KEYDOWN_MASK) {
+    sprintf(buf, "kd %s\n", keyname[keycode & ~KEYDOWN_MASK]);
+  } else {
+    sprintf(buf, "ku %s\n", keyname[keycode & ~KEYDOWN_MASK]);
+  }
+  return strlen(buf);
 }
 
 static char dispinfo[128] __attribute__((used)) = {};
