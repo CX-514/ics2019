@@ -108,6 +108,12 @@ make_EHelper(movsx) {
   print_asm_template2(movsx);
 }
 
+make_EHelper(movzx) {
+  id_dest->width = decinfo.isa.is_operand_size_16 ? 2 : 4;
+  operand_write(id_dest, &id_src->val);
+  print_asm_template2(movzx);
+}
+
 make_EHelper(movsb) {
   int incdec = -1;
   rtl_lr(&s0, R_ESI, 4);
@@ -121,11 +127,6 @@ make_EHelper(movsb) {
   print_asm("movsb")
 }
 
-make_EHelper(movzx) {
-  id_dest->width = decinfo.isa.is_operand_size_16 ? 2 : 4;
-  operand_write(id_dest, &id_src->val);
-  print_asm_template2(movzx);
-}
 
 make_EHelper(lea) {
   operand_write(id_dest, &id_src->addr);
