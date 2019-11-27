@@ -115,7 +115,7 @@ make_EHelper(movzx) {
 }
 
 make_EHelper(movsb) {
-  int incdec = 1;
+  int incdec = -1;
   rtl_lr(&s0, R_ESI, 4);
   rtl_lm(&s1, &s0, 1);
   s0 += incdec;
