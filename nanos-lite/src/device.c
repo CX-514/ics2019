@@ -26,7 +26,7 @@ size_t get_dispinfo_size() {
 }
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  strncpy(buf, dispinfo + offset, len);
+  memcpy(buf, dispinfo + offset, len);
   return len;
 }
 
