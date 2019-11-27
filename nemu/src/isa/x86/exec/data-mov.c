@@ -112,7 +112,7 @@ make_EHelper(movsb) {
   int incdec = 1;
   switch (decinfo.opcode & 0xff) {
     case 0xa4:
-      incdec = cpu.eflags.DF ? -1 : 1;
+      incdec = -1;
       rtl_lr(&s0, R_ESI, 4);
       rtl_lm(&s1, &s0, 1);
       s0 += incdec;
@@ -150,7 +150,7 @@ make_EHelper(movsb) {
       break;
     default:
       panic("movs");
-}
+  }
 }
 
 make_EHelper(movzx) {
