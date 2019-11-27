@@ -36,8 +36,8 @@ static Finfo file_table[] __attribute__((used)) = {
   {"stdout", 0, 0, 0, invalid_read, serial_write},
   {"stderr", 0, 0, 0, invalid_read, serial_write},
   {"/dev/fb", 0, 0, 0, invalid_read, fb_write},
-  {"/proc/dispinfo", 0, 0, 0, dispinfo_read, invalid_write},
 #include "files.h"
+  {"/proc/dispinfo", 0, 0, 0, dispinfo_read, invalid_write},
 };
 
 #define NR_FILES (sizeof(file_table) / sizeof(file_table[0]))
@@ -47,6 +47,8 @@ void init_fs() {
   int W = screen_width();
 	int H = screen_height();
   file_table[FD_FB].size = W * H * 4;
+  int fd = fs_open("/proc/dispinfo", 0, 0);
+  file_table[fd].size = 128;
 }
 
 int fs_open(const char *pathname, int flags, int mode) {
