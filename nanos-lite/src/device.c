@@ -33,8 +33,11 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 size_t fb_write(const void *buf, size_t offset, size_t len) {
   int x, y;
   int w = screen_width();
+  int h = screen_height();
+  assert(offset + len <= (size_t)h * w * 4);
   x = (offset / 4) % w;
   y = (offset / 4) / w;
+  assert(x + len < (size_t)w * 4);
   draw_rect((void *)buf, x, y, len / 4, 1);
   return len;
 }
