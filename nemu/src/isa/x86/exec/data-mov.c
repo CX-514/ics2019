@@ -108,6 +108,19 @@ make_EHelper(movsx) {
   print_asm_template2(movsx);
 }
 
+make_EHelper(movsb) {
+  int incdec = cpu.eflags.DF ? -1 : 1;
+  rtl_lr(&s0, R_ESI, 4);
+  rtl_lm(&s1, &s0, 1);
+  s0 += incdec;
+  rtl_sr(R_ESI, &s0, 4);
+  rtl_lr(&s0, R_EDI, 4);
+  rtl_sm(&s0, &s1, 1);
+  s0 += incdec;
+  rtl_sr(R_EDI, &s0, 4);
+  print_asm("movsb")
+}
+
 make_EHelper(movzx) {
   id_dest->width = decinfo.isa.is_operand_size_16 ? 2 : 4;
   operand_write(id_dest, &id_src->val);
