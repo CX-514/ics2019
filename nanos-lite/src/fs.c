@@ -94,11 +94,11 @@ size_t fs_lseek(int fd, size_t offset, int whence) {
 
 size_t fs_write(int fd, const void *buf, size_t len) {
   assert(0 <= fd && fd < NR_FILES);
-  if(fd==1||fd==2) {
-		for(int i=0;i<len;i++)
-		  _putc(*(char*)(buf+i));
-    return len;
-  } 
+  // if(fd==1||fd==2) {
+	// 	for(int i=0;i<len;i++)
+	// 	  _putc(*(char*)(buf+i));
+  //   return len;
+  // } 
   size_t res;
   if(file_table[fd].write==NULL) {
 	  res=len;
