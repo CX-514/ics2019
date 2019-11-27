@@ -46,8 +46,7 @@ void init_fs() {
   // TODO: initialize the size of /dev/fb
   int width = screen_width();
 	int height = screen_height();
-	int fd=fs_open("/dev/fb", 0, 0);
-  file_table[fd].size=width*height*4;
+	file_table[FD_FB].size = width * height * 4;
 }
 
 int fs_open(const char *pathname, int flags, int mode) {
