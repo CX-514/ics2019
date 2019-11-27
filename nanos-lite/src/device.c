@@ -21,9 +21,11 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   int keycode = read_key();
   if ((keycode & ~KEYDOWN_MASK) == _KEY_NONE) {
     sprintf(buf, "t %d\n", uptime());
-  } else if (keycode & KEYDOWN_MASK) {
+  } 
+  else if (keycode & KEYDOWN_MASK) {
     sprintf(buf, "kd %s\n", keyname[keycode & ~KEYDOWN_MASK]);
-  } else {
+  } 
+  else {
     sprintf(buf, "ku %s\n", keyname[keycode & ~KEYDOWN_MASK]);
   }
   return strlen(buf);
