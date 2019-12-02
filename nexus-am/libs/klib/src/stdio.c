@@ -122,7 +122,7 @@ int sprintf(char *out, const char *fmt, ...) {
 	  		strcpy(ls,va_arg(ap, char*));
 	  		strcat(out,ls);
 	  		sum += strlen(ls);
-		}break;
+		} break;
 		default: {
 			printf("sprintf fault \n");
 		}
