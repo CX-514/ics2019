@@ -6,9 +6,9 @@ struct _Context {
   struct _AddressSpace *as;
   int irq;*/
   struct _AddressSpace *as;
-  uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
+  uintptr_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
   int irq;
-  uint32_t eip, cs, eflags;
+  uintptr_t eip, cs, eflags;
 };
 
 #define GPR1 eax
