@@ -7,6 +7,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len);
 size_t dispinfo_read(void *buf, size_t offset, size_t len);
 size_t fbsync_write(const void *buf, size_t offset, size_t len);
 size_t events_read(void *buf, size_t offset, size_t len);
+size_t get_dispinfo_size() ;
 
 typedef size_t (*ReadFn) (void *buf, size_t offset, size_t len);
 typedef size_t (*WriteFn) (const void *buf, size_t offset, size_t len);
@@ -53,7 +54,7 @@ void init_fs() {
 	int H = screen_height();
   file_table[FD_FB].size = W * H * 4;
   int fd = fs_open("/proc/dispinfo", 0, 0);
-  file_table[fd].size = 128;
+  file_table[fd].size = get_dispinfo_size();
 }
 
 int fs_open(const char *pathname, int flags, int mode) {
